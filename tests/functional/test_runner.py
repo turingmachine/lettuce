@@ -150,7 +150,7 @@ def test_output_with_success_colorless():
         "\n"
         "  Scenario: Do nothing                   # tests/functional/output_features/runner_features/first.feature:6\n"
         "    Given I do nothing                   # tests/functional/output_features/runner_features/dumb_steps.py:6\n"
-        "\033[A    Given I do nothing                   # tests/functional/output_features/runner_features/dumb_steps.py:6\n"
+        "#{up}    Given I do nothing                   # tests/functional/output_features/runner_features/dumb_steps.py:6\n"
         "\n"
         "1 feature (1 passed)\n"
         "1 scenario (1 passed)\n"
@@ -166,18 +166,18 @@ def test_output_with_success_colorful():
 
     assert_stdout_lines(
         "\n" \
-        "\033[1;37mFeature: Dumb feature                    \033[1;30m# tests/functional/output_features/runner_features/first.feature:1\033[0m\n" \
-        "\033[1;37m  In order to test success               \033[1;30m# tests/functional/output_features/runner_features/first.feature:2\033[0m\n" \
-        "\033[1;37m  As a programmer                        \033[1;30m# tests/functional/output_features/runner_features/first.feature:3\033[0m\n" \
-        "\033[1;37m  I want to see that the output is green \033[1;30m# tests/functional/output_features/runner_features/first.feature:4\033[0m\n" \
+        "#{bold}#{white}Feature: Dumb feature                    #{bold}#{black}# tests/functional/output_features/runner_features/first.feature:1#{reset}\n" \
+        "#{bold}#{white}  In order to test success               #{bold}#{black}# tests/functional/output_features/runner_features/first.feature:2#{reset}\n" \
+        "#{bold}#{white}  As a programmer                        #{bold}#{black}# tests/functional/output_features/runner_features/first.feature:3#{reset}\n" \
+        "#{bold}#{white}  I want to see that the output is green #{bold}#{black}# tests/functional/output_features/runner_features/first.feature:4#{reset}\n" \
         "\n" \
-        "\033[1;37m  Scenario: Do nothing                   \033[1;30m# tests/functional/output_features/runner_features/first.feature:6\033[0m\n" \
-        "\033[1;30m    Given I do nothing                   \033[1;30m# tests/functional/output_features/runner_features/dumb_steps.py:6\033[0m\n" \
-        "\033[A\033[1;32m    Given I do nothing                   \033[1;30m# tests/functional/output_features/runner_features/dumb_steps.py:6\033[0m\n" \
+        "#{bold}#{white}  Scenario: Do nothing                   #{bold}#{black}# tests/functional/output_features/runner_features/first.feature:6#{reset}\n" \
+        "#{bold}#{black}    Given I do nothing                   #{bold}#{black}# tests/functional/output_features/runner_features/dumb_steps.py:6#{reset}\n" \
+        "#{up}#{bold}#{green}    Given I do nothing                   #{bold}#{black}# tests/functional/output_features/runner_features/dumb_steps.py:6#{reset}\n" \
         "\n" \
-        "\033[1;37m1 feature (\033[1;32m1 passed\033[1;37m)\033[0m\n" \
-        "\033[1;37m1 scenario (\033[1;32m1 passed\033[1;37m)\033[0m\n" \
-        "\033[1;37m1 step (\033[1;32m1 passed\033[1;37m)\033[0m\n"
+        "#{bold}#{white}1 feature (#{bold}#{green}1 passed#{bold}#{white})#{reset}\n" \
+        "#{bold}#{white}1 scenario (#{bold}#{green}1 passed#{bold}#{white})#{reset}\n" \
+        "#{bold}#{white}1 step (#{bold}#{green}1 passed#{bold}#{white})#{reset}\n"
     )
 
 @with_setup(prepare_stdout)
@@ -195,18 +195,18 @@ def test_output_with_success_colorless_many_features():
         "\n"
         "  Scenario: Do nothing                       # tests/functional/output_features/many_successful_features/one.feature:6\n"
         "    Given I do nothing                       # tests/functional/output_features/many_successful_features/dumb_steps.py:6\n"
-        "\033[A    Given I do nothing                       # tests/functional/output_features/many_successful_features/dumb_steps.py:6\n"
+        "#{up}    Given I do nothing                       # tests/functional/output_features/many_successful_features/dumb_steps.py:6\n"
         "    Then I see that the test passes          # tests/functional/output_features/many_successful_features/dumb_steps.py:8\n"
-        "\033[A    Then I see that the test passes          # tests/functional/output_features/many_successful_features/dumb_steps.py:8\n"
+        "#{up}    Then I see that the test passes          # tests/functional/output_features/many_successful_features/dumb_steps.py:8\n"
         "\n"
         "Feature: Second feature, of many    # tests/functional/output_features/many_successful_features/two.feature:1\n"
         "  I just want to see it green :)    # tests/functional/output_features/many_successful_features/two.feature:2\n"
         "\n"
         "  Scenario: Do nothing              # tests/functional/output_features/many_successful_features/two.feature:4\n"
         "    Given I do nothing              # tests/functional/output_features/many_successful_features/dumb_steps.py:6\n"
-        "\033[A    Given I do nothing              # tests/functional/output_features/many_successful_features/dumb_steps.py:6\n"
+        "#{up}    Given I do nothing              # tests/functional/output_features/many_successful_features/dumb_steps.py:6\n"
         "    Then I see that the test passes # tests/functional/output_features/many_successful_features/dumb_steps.py:8\n"
-        "\033[A    Then I see that the test passes # tests/functional/output_features/many_successful_features/dumb_steps.py:8\n"
+        "#{up}    Then I see that the test passes # tests/functional/output_features/many_successful_features/dumb_steps.py:8\n"
         "\n"
         "2 features (2 passed)\n"
         "2 scenarios (2 passed)\n"
@@ -222,29 +222,29 @@ def test_output_with_success_colorful_many_features():
 
     assert_stdout_lines(
         "\n"
-        "\033[1;37mFeature: First feature, of many              \033[1;30m# tests/functional/output_features/many_successful_features/one.feature:1\033[0m\n"
-        "\033[1;37m  In order to make lettuce more robust       \033[1;30m# tests/functional/output_features/many_successful_features/one.feature:2\033[0m\n"
-        "\033[1;37m  As a programmer                            \033[1;30m# tests/functional/output_features/many_successful_features/one.feature:3\033[0m\n"
-        "\033[1;37m  I want to test its output on many features \033[1;30m# tests/functional/output_features/many_successful_features/one.feature:4\033[0m\n"
+        "#{bold}#{white}Feature: First feature, of many              #{bold}#{black}# tests/functional/output_features/many_successful_features/one.feature:1#{reset}\n"
+        "#{bold}#{white}  In order to make lettuce more robust       #{bold}#{black}# tests/functional/output_features/many_successful_features/one.feature:2#{reset}\n"
+        "#{bold}#{white}  As a programmer                            #{bold}#{black}# tests/functional/output_features/many_successful_features/one.feature:3#{reset}\n"
+        "#{bold}#{white}  I want to test its output on many features #{bold}#{black}# tests/functional/output_features/many_successful_features/one.feature:4#{reset}\n"
         "\n"
-        "\033[1;37m  Scenario: Do nothing                       \033[1;30m# tests/functional/output_features/many_successful_features/one.feature:6\033[0m\n"
-        "\033[1;30m    Given I do nothing                       \033[1;30m# tests/functional/output_features/many_successful_features/dumb_steps.py:6\033[0m\n"
-        "\033[A\033[1;32m    Given I do nothing                       \033[1;30m# tests/functional/output_features/many_successful_features/dumb_steps.py:6\033[0m\n"
-        "\033[1;30m    Then I see that the test passes          \033[1;30m# tests/functional/output_features/many_successful_features/dumb_steps.py:8\033[0m\n"
-        "\033[A\033[1;32m    Then I see that the test passes          \033[1;30m# tests/functional/output_features/many_successful_features/dumb_steps.py:8\033[0m\n"
+        "#{bold}#{white}  Scenario: Do nothing                       #{bold}#{black}# tests/functional/output_features/many_successful_features/one.feature:6#{reset}\n"
+        "#{bold}#{black}    Given I do nothing                       #{bold}#{black}# tests/functional/output_features/many_successful_features/dumb_steps.py:6#{reset}\n"
+        "#{up}#{bold}#{green}    Given I do nothing                       #{bold}#{black}# tests/functional/output_features/many_successful_features/dumb_steps.py:6#{reset}\n"
+        "#{bold}#{black}    Then I see that the test passes          #{bold}#{black}# tests/functional/output_features/many_successful_features/dumb_steps.py:8#{reset}\n"
+        "#{up}#{bold}#{green}    Then I see that the test passes          #{bold}#{black}# tests/functional/output_features/many_successful_features/dumb_steps.py:8#{reset}\n"
         "\n"
-        "\033[1;37mFeature: Second feature, of many    \033[1;30m# tests/functional/output_features/many_successful_features/two.feature:1\033[0m\n"
-        "\033[1;37m  I just want to see it green :)    \033[1;30m# tests/functional/output_features/many_successful_features/two.feature:2\033[0m\n"
+        "#{bold}#{white}Feature: Second feature, of many    #{bold}#{black}# tests/functional/output_features/many_successful_features/two.feature:1#{reset}\n"
+        "#{bold}#{white}  I just want to see it green :)    #{bold}#{black}# tests/functional/output_features/many_successful_features/two.feature:2#{reset}\n"
         "\n"
-        "\033[1;37m  Scenario: Do nothing              \033[1;30m# tests/functional/output_features/many_successful_features/two.feature:4\033[0m\n"
-        "\033[1;30m    Given I do nothing              \033[1;30m# tests/functional/output_features/many_successful_features/dumb_steps.py:6\033[0m\n"
-        "\033[A\033[1;32m    Given I do nothing              \033[1;30m# tests/functional/output_features/many_successful_features/dumb_steps.py:6\033[0m\n"
-        "\033[1;30m    Then I see that the test passes \033[1;30m# tests/functional/output_features/many_successful_features/dumb_steps.py:8\033[0m\n"
-        "\033[A\033[1;32m    Then I see that the test passes \033[1;30m# tests/functional/output_features/many_successful_features/dumb_steps.py:8\033[0m\n"
+        "#{bold}#{white}  Scenario: Do nothing              #{bold}#{black}# tests/functional/output_features/many_successful_features/two.feature:4#{reset}\n"
+        "#{bold}#{black}    Given I do nothing              #{bold}#{black}# tests/functional/output_features/many_successful_features/dumb_steps.py:6#{reset}\n"
+        "#{up}#{bold}#{green}    Given I do nothing              #{bold}#{black}# tests/functional/output_features/many_successful_features/dumb_steps.py:6#{reset}\n"
+        "#{bold}#{black}    Then I see that the test passes #{bold}#{black}# tests/functional/output_features/many_successful_features/dumb_steps.py:8#{reset}\n"
+        "#{up}#{bold}#{green}    Then I see that the test passes #{bold}#{black}# tests/functional/output_features/many_successful_features/dumb_steps.py:8#{reset}\n"
         "\n"
-        "\033[1;37m2 features (\033[1;32m2 passed\033[1;37m)\033[0m\n" \
-        "\033[1;37m2 scenarios (\033[1;32m2 passed\033[1;37m)\033[0m\n" \
-        "\033[1;37m4 steps (\033[1;32m4 passed\033[1;37m)\033[0m\n"
+        "#{bold}#{white}2 features (#{bold}#{green}2 passed#{bold}#{white})#{reset}\n" \
+        "#{bold}#{white}2 scenarios (#{bold}#{green}2 passed#{bold}#{white})#{reset}\n" \
+        "#{bold}#{white}4 steps (#{bold}#{green}4 passed#{bold}#{white})#{reset}\n"
     )
 
 @with_setup(prepare_stdout)
@@ -256,8 +256,8 @@ def test_output_when_could_not_find_features():
     runner.run()
 
     assert_stdout_lines(
-        '\033[1;31mOops!\033[0m\n'
-        '\033[1;37mcould not find features at \033[1;33m./%s\033[0m\n' % path
+        '#{bold}#{red}Oops!#{reset}\n'
+        '#{bold}#{white}could not find features at #{bold}#{yellow}./%s#{reset}\n' % path
     )
 
 @with_setup(prepare_stdout)
@@ -286,23 +286,23 @@ def test_output_with_success_colorless_with_table():
         '\n'
         '  Scenario: Add two numbers      # tests/functional/output_features/success_table/success_table.feature:2\n'
         '    Given I have 0 bucks         # tests/functional/output_features/success_table/success_table_steps.py:28\n'
-        '\033[A    Given I have 0 bucks         # tests/functional/output_features/success_table/success_table_steps.py:28\n'
+        '#{up}    Given I have 0 bucks         # tests/functional/output_features/success_table/success_table_steps.py:28\n'
         '    And that I have these items: # tests/functional/output_features/success_table/success_table_steps.py:32\n'
         '      | name    | price  |\n'
         '      | Porsche | 200000 |\n'
         '      | Ferrari | 400000 |\n'
-        '\033[A\033[A\033[A\033[A    And that I have these items: # tests/functional/output_features/success_table/success_table_steps.py:32\n'
+        '#{up}#{up}#{up}#{up}    And that I have these items: # tests/functional/output_features/success_table/success_table_steps.py:32\n'
         '      | name    | price  |\n'
         '      | Porsche | 200000 |\n'
         '      | Ferrari | 400000 |\n'
         '    When I sell the "Ferrari"    # tests/functional/output_features/success_table/success_table_steps.py:42\n'
-        '\033[A    When I sell the "Ferrari"    # tests/functional/output_features/success_table/success_table_steps.py:42\n'
+        '#{up}    When I sell the "Ferrari"    # tests/functional/output_features/success_table/success_table_steps.py:42\n'
         '    Then I have 400000 bucks     # tests/functional/output_features/success_table/success_table_steps.py:28\n'
-        '\033[A    Then I have 400000 bucks     # tests/functional/output_features/success_table/success_table_steps.py:28\n'
+        '#{up}    Then I have 400000 bucks     # tests/functional/output_features/success_table/success_table_steps.py:28\n'
         '    And my garage contains:      # tests/functional/output_features/success_table/success_table_steps.py:47\n'
         '      | name    | price  |\n'
         '      | Porsche | 200000 |\n'
-        '\033[A\033[A\033[A    And my garage contains:      # tests/functional/output_features/success_table/success_table_steps.py:47\n'
+        '#{up}#{up}#{up}    And my garage contains:      # tests/functional/output_features/success_table/success_table_steps.py:47\n'
         '      | name    | price  |\n'
         '      | Porsche | 200000 |\n'
         '\n'
@@ -320,33 +320,33 @@ def test_output_with_success_colorful_with_table():
 
     assert_stdout_lines(
         '\n'
-        '\033[1;37mFeature: Table Success           \033[1;30m# tests/functional/output_features/success_table/success_table.feature:1\033[0m\n'
+        '#{bold}#{white}Feature: Table Success           #{bold}#{black}# tests/functional/output_features/success_table/success_table.feature:1#{reset}\n'
         '\n'
-        '\033[1;37m  Scenario: Add two numbers      \033[1;30m# tests/functional/output_features/success_table/success_table.feature:2\033[0m\n'
-        '\033[1;30m    Given I have 0 bucks         \033[1;30m# tests/functional/output_features/success_table/success_table_steps.py:28\033[0m\n'
-        '\033[A\033[1;32m    Given I have 0 bucks         \033[1;30m# tests/functional/output_features/success_table/success_table_steps.py:28\033[0m\n'
-        '\033[1;30m    And that I have these items: \033[1;30m# tests/functional/output_features/success_table/success_table_steps.py:32\033[0m\n'
-        '\033[1;30m     \033[1;37m |\033[1;30m name   \033[1;37m |\033[1;30m price \033[1;37m |\033[1;30m\033[0m\n'
-        '\033[1;30m     \033[1;37m |\033[1;30m Porsche\033[1;37m |\033[1;30m 200000\033[1;37m |\033[1;30m\033[0m\n'
-        '\033[1;30m     \033[1;37m |\033[1;30m Ferrari\033[1;37m |\033[1;30m 400000\033[1;37m |\033[1;30m\033[0m\n'
-        '\033[A\033[A\033[A\033[A\033[1;32m    And that I have these items: \033[1;30m# tests/functional/output_features/success_table/success_table_steps.py:32\033[0m\n'
-        '\033[1;32m     \033[1;37m |\033[1;32m name   \033[1;37m |\033[1;32m price \033[1;37m |\033[1;32m\033[0m\n'
-        '\033[1;32m     \033[1;37m |\033[1;32m Porsche\033[1;37m |\033[1;32m 200000\033[1;37m |\033[1;32m\033[0m\n'
-        '\033[1;32m     \033[1;37m |\033[1;32m Ferrari\033[1;37m |\033[1;32m 400000\033[1;37m |\033[1;32m\033[0m\n'
-        '\033[1;30m    When I sell the "Ferrari"    \033[1;30m# tests/functional/output_features/success_table/success_table_steps.py:42\033[0m\n'
-        '\033[A\033[1;32m    When I sell the "Ferrari"    \033[1;30m# tests/functional/output_features/success_table/success_table_steps.py:42\033[0m\n'
-        '\033[1;30m    Then I have 400000 bucks     \033[1;30m# tests/functional/output_features/success_table/success_table_steps.py:28\033[0m\n'
-        '\033[A\033[1;32m    Then I have 400000 bucks     \033[1;30m# tests/functional/output_features/success_table/success_table_steps.py:28\033[0m\n'
-        '\033[1;30m    And my garage contains:      \033[1;30m# tests/functional/output_features/success_table/success_table_steps.py:47\033[0m\n'
-        '\033[1;30m     \033[1;37m |\033[1;30m name   \033[1;37m |\033[1;30m price \033[1;37m |\033[1;30m\033[0m\n'
-        '\033[1;30m     \033[1;37m |\033[1;30m Porsche\033[1;37m |\033[1;30m 200000\033[1;37m |\033[1;30m\033[0m\n'
-        '\033[A\033[A\033[A\033[1;32m    And my garage contains:      \033[1;30m# tests/functional/output_features/success_table/success_table_steps.py:47\033[0m\n'
-        '\033[1;32m     \033[1;37m |\033[1;32m name   \033[1;37m |\033[1;32m price \033[1;37m |\033[1;32m\033[0m\n'
-        '\033[1;32m     \033[1;37m |\033[1;32m Porsche\033[1;37m |\033[1;32m 200000\033[1;37m |\033[1;32m\033[0m\n'
+        '#{bold}#{white}  Scenario: Add two numbers      #{bold}#{black}# tests/functional/output_features/success_table/success_table.feature:2#{reset}\n'
+        '#{bold}#{black}    Given I have 0 bucks         #{bold}#{black}# tests/functional/output_features/success_table/success_table_steps.py:28#{reset}\n'
+        '#{up}#{bold}#{green}    Given I have 0 bucks         #{bold}#{black}# tests/functional/output_features/success_table/success_table_steps.py:28#{reset}\n'
+        '#{bold}#{black}    And that I have these items: #{bold}#{black}# tests/functional/output_features/success_table/success_table_steps.py:32#{reset}\n'
+        '#{bold}#{black}     #{bold}#{white} |#{bold}#{black} name   #{bold}#{white} |#{bold}#{black} price #{bold}#{white} |#{bold}#{black}#{reset}\n'
+        '#{bold}#{black}     #{bold}#{white} |#{bold}#{black} Porsche#{bold}#{white} |#{bold}#{black} 200000#{bold}#{white} |#{bold}#{black}#{reset}\n'
+        '#{bold}#{black}     #{bold}#{white} |#{bold}#{black} Ferrari#{bold}#{white} |#{bold}#{black} 400000#{bold}#{white} |#{bold}#{black}#{reset}\n'
+        '#{up}#{up}#{up}#{up}#{bold}#{green}    And that I have these items: #{bold}#{black}# tests/functional/output_features/success_table/success_table_steps.py:32#{reset}\n'
+        '#{bold}#{green}     #{bold}#{white} |#{bold}#{green} name   #{bold}#{white} |#{bold}#{green} price #{bold}#{white} |#{bold}#{green}#{reset}\n'
+        '#{bold}#{green}     #{bold}#{white} |#{bold}#{green} Porsche#{bold}#{white} |#{bold}#{green} 200000#{bold}#{white} |#{bold}#{green}#{reset}\n'
+        '#{bold}#{green}     #{bold}#{white} |#{bold}#{green} Ferrari#{bold}#{white} |#{bold}#{green} 400000#{bold}#{white} |#{bold}#{green}#{reset}\n'
+        '#{bold}#{black}    When I sell the "Ferrari"    #{bold}#{black}# tests/functional/output_features/success_table/success_table_steps.py:42#{reset}\n'
+        '#{up}#{bold}#{green}    When I sell the "Ferrari"    #{bold}#{black}# tests/functional/output_features/success_table/success_table_steps.py:42#{reset}\n'
+        '#{bold}#{black}    Then I have 400000 bucks     #{bold}#{black}# tests/functional/output_features/success_table/success_table_steps.py:28#{reset}\n'
+        '#{up}#{bold}#{green}    Then I have 400000 bucks     #{bold}#{black}# tests/functional/output_features/success_table/success_table_steps.py:28#{reset}\n'
+        '#{bold}#{black}    And my garage contains:      #{bold}#{black}# tests/functional/output_features/success_table/success_table_steps.py:47#{reset}\n'
+        '#{bold}#{black}     #{bold}#{white} |#{bold}#{black} name   #{bold}#{white} |#{bold}#{black} price #{bold}#{white} |#{bold}#{black}#{reset}\n'
+        '#{bold}#{black}     #{bold}#{white} |#{bold}#{black} Porsche#{bold}#{white} |#{bold}#{black} 200000#{bold}#{white} |#{bold}#{black}#{reset}\n'
+        '#{up}#{up}#{up}#{bold}#{green}    And my garage contains:      #{bold}#{black}# tests/functional/output_features/success_table/success_table_steps.py:47#{reset}\n'
+        '#{bold}#{green}     #{bold}#{white} |#{bold}#{green} name   #{bold}#{white} |#{bold}#{green} price #{bold}#{white} |#{bold}#{green}#{reset}\n'
+        '#{bold}#{green}     #{bold}#{white} |#{bold}#{green} Porsche#{bold}#{white} |#{bold}#{green} 200000#{bold}#{white} |#{bold}#{green}#{reset}\n'
         '\n'
-        "\033[1;37m1 feature (\033[1;32m1 passed\033[1;37m)\033[0m\n" \
-        "\033[1;37m1 scenario (\033[1;32m1 passed\033[1;37m)\033[0m\n" \
-        "\033[1;37m5 steps (\033[1;32m5 passed\033[1;37m)\033[0m\n"
+        "#{bold}#{white}1 feature (#{bold}#{green}1 passed#{bold}#{white})#{reset}\n" \
+        "#{bold}#{white}1 scenario (#{bold}#{green}1 passed#{bold}#{white})#{reset}\n" \
+        "#{bold}#{white}5 steps (#{bold}#{green}5 passed#{bold}#{white})#{reset}\n"
     )
 
 @with_setup(prepare_stdout)
@@ -362,9 +362,9 @@ def test_output_with_failed_colorless_with_table():
         "\n"
         "  Scenario: See it fail                       # tests/functional/output_features/failed_table/failed_table.feature:2\n"
         "    Given I have a dumb step that passes      # tests/functional/output_features/failed_table/failed_table_steps.py:20\n"
-        "\033[A    Given I have a dumb step that passes      # tests/functional/output_features/failed_table/failed_table_steps.py:20\n"
+        "#{up}    Given I have a dumb step that passes      # tests/functional/output_features/failed_table/failed_table_steps.py:20\n"
         "    And this one fails                        # tests/functional/output_features/failed_table/failed_table_steps.py:24\n"
-        "\033[A    And this one fails                        # tests/functional/output_features/failed_table/failed_table_steps.py:24\n"
+        "#{up}    And this one fails                        # tests/functional/output_features/failed_table/failed_table_steps.py:24\n"
         "    Traceback (most recent call last):\n"
         '      File "%(lettuce_core_file)s", line %(call_line)d, in __call__\n'
         "        ret = self.function(self.step, *args, **kw)\n"
@@ -372,9 +372,9 @@ def test_output_with_failed_colorless_with_table():
         "        assert False\n"
         "    AssertionError\n"
         "    Then this one will be skipped             # tests/functional/output_features/failed_table/failed_table_steps.py:28\n"
-        "\033[A    Then this one will be skipped             # tests/functional/output_features/failed_table/failed_table_steps.py:28\n"
+        "#{up}    Then this one will be skipped             # tests/functional/output_features/failed_table/failed_table_steps.py:28\n"
         "    And this one will be skipped              # tests/functional/output_features/failed_table/failed_table_steps.py:28\n"
-        "\033[A    And this one will be skipped              # tests/functional/output_features/failed_table/failed_table_steps.py:28\n"
+        "#{up}    And this one will be skipped              # tests/functional/output_features/failed_table/failed_table_steps.py:28\n"
         "    And this one does not even has definition # tests/functional/output_features/failed_table/failed_table.feature:12 (undefined)\n"
         "\n"
         "1 feature (0 passed)\n"
@@ -404,37 +404,37 @@ def test_output_with_failed_colorful_with_table():
 
     assert_stdout_lines_with_traceback(
         "\n"
-        "\033[1;37mFeature: Table Fail                           \033[1;30m# tests/functional/output_features/failed_table/failed_table.feature:1\033[0m\n"
+        "#{bold}#{white}Feature: Table Fail                           #{bold}#{black}# tests/functional/output_features/failed_table/failed_table.feature:1#{reset}\n"
         "\n"
-        "\033[1;37m  Scenario: See it fail                       \033[1;30m# tests/functional/output_features/failed_table/failed_table.feature:2\033[0m\n"
-        "\033[1;30m    Given I have a dumb step that passes      \033[1;30m# tests/functional/output_features/failed_table/failed_table_steps.py:20\033[0m\n"
-        "\033[A\033[1;32m    Given I have a dumb step that passes      \033[1;30m# tests/functional/output_features/failed_table/failed_table_steps.py:20\033[0m\n"
-        "\033[1;30m    And this one fails                        \033[1;30m# tests/functional/output_features/failed_table/failed_table_steps.py:24\033[0m\n"
-        "\033[A\033[0;31m    And this one fails                        \033[1;41;33m# tests/functional/output_features/failed_table/failed_table_steps.py:24\033[0m\n"
-        "\033[1;31m    Traceback (most recent call last):\n"
+        "#{bold}#{white}  Scenario: See it fail                       #{bold}#{black}# tests/functional/output_features/failed_table/failed_table.feature:2#{reset}\n"
+        "#{bold}#{black}    Given I have a dumb step that passes      #{bold}#{black}# tests/functional/output_features/failed_table/failed_table_steps.py:20#{reset}\n"
+        "#{up}#{bold}#{green}    Given I have a dumb step that passes      #{bold}#{black}# tests/functional/output_features/failed_table/failed_table_steps.py:20#{reset}\n"
+        "#{bold}#{black}    And this one fails                        #{bold}#{black}# tests/functional/output_features/failed_table/failed_table_steps.py:24#{reset}\n"
+        "#{up}#{reset}#{red}    And this one fails                        #{bold}#{red}#{on:yellow}# tests/functional/output_features/failed_table/failed_table_steps.py:24#{reset}\n"
+        "#{bold}#{red}    Traceback (most recent call last):\n"
         '      File "%(lettuce_core_file)s", line %(call_line)d, in __call__\n'
         "        ret = self.function(self.step, *args, **kw)\n"
         '      File "%(step_file)s", line 25, in tof\n'
         "        assert False\n"
-        "    AssertionError\033[0m\n"
-        "\033[1;30m    Then this one will be skipped             \033[1;30m# tests/functional/output_features/failed_table/failed_table_steps.py:28\033[0m\n"
-        "\033[A\033[0;36m    Then this one will be skipped             \033[1;30m# tests/functional/output_features/failed_table/failed_table_steps.py:28\033[0m\n"
-        "\033[1;30m    And this one will be skipped              \033[1;30m# tests/functional/output_features/failed_table/failed_table_steps.py:28\033[0m\n"
-        "\033[A\033[0;36m    And this one will be skipped              \033[1;30m# tests/functional/output_features/failed_table/failed_table_steps.py:28\033[0m\n"
-        "\033[0;33m    And this one does not even has definition \033[1;30m# tests/functional/output_features/failed_table/failed_table.feature:12\033[0m\n"
+        "    AssertionError#{reset}\n"
+        "#{bold}#{black}    Then this one will be skipped             #{bold}#{black}# tests/functional/output_features/failed_table/failed_table_steps.py:28#{reset}\n"
+        "#{up}#{reset}#{cyan}    Then this one will be skipped             #{bold}#{black}# tests/functional/output_features/failed_table/failed_table_steps.py:28#{reset}\n"
+        "#{bold}#{black}    And this one will be skipped              #{bold}#{black}# tests/functional/output_features/failed_table/failed_table_steps.py:28#{reset}\n"
+        "#{up}#{reset}#{cyan}    And this one will be skipped              #{bold}#{black}# tests/functional/output_features/failed_table/failed_table_steps.py:28#{reset}\n"
+        "#{reset}#{yellow}    And this one does not even has definition #{bold}#{black}# tests/functional/output_features/failed_table/failed_table.feature:12#{reset}\n"
         "\n"
-        "\033[1;37m1 feature (\033[0;31m0 passed\033[1;37m)\033[0m\n"
-        "\033[1;37m1 scenario (\033[0;31m0 passed\033[1;37m)\033[0m\n"
-        "\033[1;37m5 steps (\033[0;31m1 failed\033[1;37m, \033[0;36m2 skipped\033[1;37m, \033[0;33m1 undefined\033[1;37m, \033[1;32m1 passed\033[1;37m)\033[0m\n"
+        "#{bold}#{white}1 feature (#{reset}#{red}0 passed#{bold}#{white})#{reset}\n"
+        "#{bold}#{white}1 scenario (#{reset}#{red}0 passed#{bold}#{white})#{reset}\n"
+        "#{bold}#{white}5 steps (#{reset}#{red}1 failed#{bold}#{white}, #{reset}#{cyan}2 skipped#{bold}#{white}, #{reset}#{yellow}1 undefined#{bold}#{white}, #{bold}#{green}1 passed#{bold}#{white})#{reset}\n"
         "\n"
-        "\033[0;33mYou can implement step definitions for undefined steps with these snippets:\n"
+        "#{reset}#{yellow}You can implement step definitions for undefined steps with these snippets:\n"
         "\n"
         "# -*- coding: utf-8 -*-\n"
         "from lettuce import step\n"
         "\n"
         "@step(u'And this one does not even has definition')\n"
         "def and_this_one_does_not_even_has_definition(step):\n"
-        "    pass\033[0m"
+        "    pass#{reset}"
         "\n" % {
             'lettuce_core_file': lettuce_path('core.py'),
             'step_file': abspath(lettuce_path('..', 'tests', 'functional', 'output_features', 'failed_table', 'failed_table_steps.py')),
@@ -486,30 +486,30 @@ def test_output_with_successful_outline_colorful():
 
     assert_stdout_lines_with_traceback(
         '\n'
-        '\033[1;37mFeature: Successful Scenario Outline                          \033[1;30m# tests/functional/output_features/success_outline/success_outline.feature:1\033[0m\n'
-        '\033[1;37m  As lettuce author                                           \033[1;30m# tests/functional/output_features/success_outline/success_outline.feature:2\033[0m\n'
-        '\033[1;37m  In order to finish the first release                        \033[1;30m# tests/functional/output_features/success_outline/success_outline.feature:3\033[0m\n'
-        '\033[1;37m  I want to make scenario outlines work :)                    \033[1;30m# tests/functional/output_features/success_outline/success_outline.feature:4\033[0m\n'
+        '#{bold}#{white}Feature: Successful Scenario Outline                          #{bold}#{black}# tests/functional/output_features/success_outline/success_outline.feature:1#{reset}\n'
+        '#{bold}#{white}  As lettuce author                                           #{bold}#{black}# tests/functional/output_features/success_outline/success_outline.feature:2#{reset}\n'
+        '#{bold}#{white}  In order to finish the first release                        #{bold}#{black}# tests/functional/output_features/success_outline/success_outline.feature:3#{reset}\n'
+        '#{bold}#{white}  I want to make scenario outlines work :)                    #{bold}#{black}# tests/functional/output_features/success_outline/success_outline.feature:4#{reset}\n'
         '\n'
-        '\033[1;37m  Scenario Outline: fill a web form                           \033[1;30m# tests/functional/output_features/success_outline/success_outline.feature:6\033[0m\n'
-        '\033[0;36m    Given I open browser at "http://www.my-website.com/"      \033[1;30m# tests/functional/output_features/success_outline/success_outline_steps.py:21\033[0m\n'
-        '\033[0;36m    And click on "sign-up"                                    \033[1;30m# tests/functional/output_features/success_outline/success_outline_steps.py:25\033[0m\n'
-        '\033[0;36m    When I fill the field "username" with "<username>"        \033[1;30m# tests/functional/output_features/success_outline/success_outline_steps.py:29\033[0m\n'
-        '\033[0;36m    And I fill the field "password" with "<password>"         \033[1;30m# tests/functional/output_features/success_outline/success_outline_steps.py:29\033[0m\n'
-        '\033[0;36m    And I fill the field "password-confirm" with "<password>" \033[1;30m# tests/functional/output_features/success_outline/success_outline_steps.py:29\033[0m\n'
-        '\033[0;36m    And I fill the field "email" with "<email>"               \033[1;30m# tests/functional/output_features/success_outline/success_outline_steps.py:29\033[0m\n'
-        '\033[0;36m    And I click "done"                                        \033[1;30m# tests/functional/output_features/success_outline/success_outline_steps.py:33\033[0m\n'
-        '\033[0;36m    Then I see the message "<message>"                        \033[1;30m# tests/functional/output_features/success_outline/success_outline_steps.py:37\033[0m\n'
+        '#{bold}#{white}  Scenario Outline: fill a web form                           #{bold}#{black}# tests/functional/output_features/success_outline/success_outline.feature:6#{reset}\n'
+        '#{reset}#{cyan}    Given I open browser at "http://www.my-website.com/"      #{bold}#{black}# tests/functional/output_features/success_outline/success_outline_steps.py:21#{reset}\n'
+        '#{reset}#{cyan}    And click on "sign-up"                                    #{bold}#{black}# tests/functional/output_features/success_outline/success_outline_steps.py:25#{reset}\n'
+        '#{reset}#{cyan}    When I fill the field "username" with "<username>"        #{bold}#{black}# tests/functional/output_features/success_outline/success_outline_steps.py:29#{reset}\n'
+        '#{reset}#{cyan}    And I fill the field "password" with "<password>"         #{bold}#{black}# tests/functional/output_features/success_outline/success_outline_steps.py:29#{reset}\n'
+        '#{reset}#{cyan}    And I fill the field "password-confirm" with "<password>" #{bold}#{black}# tests/functional/output_features/success_outline/success_outline_steps.py:29#{reset}\n'
+        '#{reset}#{cyan}    And I fill the field "email" with "<email>"               #{bold}#{black}# tests/functional/output_features/success_outline/success_outline_steps.py:29#{reset}\n'
+        '#{reset}#{cyan}    And I click "done"                                        #{bold}#{black}# tests/functional/output_features/success_outline/success_outline_steps.py:33#{reset}\n'
+        '#{reset}#{cyan}    Then I see the message "<message>"                        #{bold}#{black}# tests/functional/output_features/success_outline/success_outline_steps.py:37#{reset}\n'
         '\n'
-        '\033[1;37m  Examples:\033[0m\n'
-        '\033[0;36m   \033[1;37m |\033[0;36m username\033[1;37m |\033[0;36m password\033[1;37m |\033[0;36m email         \033[1;37m |\033[0;36m message      \033[1;37m |\033[0;36m\033[0m\n'
-        '\033[1;32m   \033[1;37m |\033[1;32m john    \033[1;37m |\033[1;32m doe-1234\033[1;37m |\033[1;32m john@gmail.org\033[1;37m |\033[1;32m Welcome, John\033[1;37m |\033[1;32m\033[0m\n'
-        '\033[1;32m   \033[1;37m |\033[1;32m mary    \033[1;37m |\033[1;32m wee-9876\033[1;37m |\033[1;32m mary@email.com\033[1;37m |\033[1;32m Welcome, Mary\033[1;37m |\033[1;32m\033[0m\n'
-        '\033[1;32m   \033[1;37m |\033[1;32m foo     \033[1;37m |\033[1;32m foo-bar \033[1;37m |\033[1;32m foo@bar.com   \033[1;37m |\033[1;32m Welcome, Foo \033[1;37m |\033[1;32m\033[0m\n'
+        '#{bold}#{white}  Examples:#{reset}\n'
+        '#{reset}#{cyan}   #{bold}#{white} |#{reset}#{cyan} username#{bold}#{white} |#{reset}#{cyan} password#{bold}#{white} |#{reset}#{cyan} email         #{bold}#{white} |#{reset}#{cyan} message      #{bold}#{white} |#{reset}#{cyan}#{reset}\n'
+        '#{bold}#{green}   #{bold}#{white} |#{bold}#{green} john    #{bold}#{white} |#{bold}#{green} doe-1234#{bold}#{white} |#{bold}#{green} john@gmail.org#{bold}#{white} |#{bold}#{green} Welcome, John#{bold}#{white} |#{bold}#{green}#{reset}\n'
+        '#{bold}#{green}   #{bold}#{white} |#{bold}#{green} mary    #{bold}#{white} |#{bold}#{green} wee-9876#{bold}#{white} |#{bold}#{green} mary@email.com#{bold}#{white} |#{bold}#{green} Welcome, Mary#{bold}#{white} |#{bold}#{green}#{reset}\n'
+        '#{bold}#{green}   #{bold}#{white} |#{bold}#{green} foo     #{bold}#{white} |#{bold}#{green} foo-bar #{bold}#{white} |#{bold}#{green} foo@bar.com   #{bold}#{white} |#{bold}#{green} Welcome, Foo #{bold}#{white} |#{bold}#{green}#{reset}\n'
         '\n'
-        "\033[1;37m1 feature (\033[1;32m1 passed\033[1;37m)\033[0m\n" \
-        "\033[1;37m3 scenarios (\033[1;32m3 passed\033[1;37m)\033[0m\n" \
-        "\033[1;37m24 steps (\033[1;32m24 passed\033[1;37m)\033[0m\n"
+        "#{bold}#{white}1 feature (#{bold}#{green}1 passed#{bold}#{white})#{reset}\n" \
+        "#{bold}#{white}3 scenarios (#{bold}#{green}3 passed#{bold}#{white})#{reset}\n" \
+        "#{bold}#{white}24 steps (#{bold}#{green}24 passed#{bold}#{white})#{reset}\n"
     )
 
 @with_setup(prepare_stdout)
@@ -566,36 +566,36 @@ def test_output_with_failful_outline_colorful():
 
     assert_stdout_lines_with_traceback(
         '\n'
-        '\033[1;37mFeature: Failful Scenario Outline                             \033[1;30m# tests/functional/output_features/fail_outline/fail_outline.feature:1\033[0m\n'
-        '\033[1;37m  As lettuce author                                           \033[1;30m# tests/functional/output_features/fail_outline/fail_outline.feature:2\033[0m\n'
-        '\033[1;37m  In order to finish the first release                        \033[1;30m# tests/functional/output_features/fail_outline/fail_outline.feature:3\033[0m\n'
-        '\033[1;37m  I want to make scenario outlines work :)                    \033[1;30m# tests/functional/output_features/fail_outline/fail_outline.feature:4\033[0m\n'
+        '#{bold}#{white}Feature: Failful Scenario Outline                             #{bold}#{black}# tests/functional/output_features/fail_outline/fail_outline.feature:1#{reset}\n'
+        '#{bold}#{white}  As lettuce author                                           #{bold}#{black}# tests/functional/output_features/fail_outline/fail_outline.feature:2#{reset}\n'
+        '#{bold}#{white}  In order to finish the first release                        #{bold}#{black}# tests/functional/output_features/fail_outline/fail_outline.feature:3#{reset}\n'
+        '#{bold}#{white}  I want to make scenario outlines work :)                    #{bold}#{black}# tests/functional/output_features/fail_outline/fail_outline.feature:4#{reset}\n'
         '\n'
-        '\033[1;37m  Scenario Outline: fill a web form                           \033[1;30m# tests/functional/output_features/fail_outline/fail_outline.feature:6\033[0m\n'
-        '\033[0;36m    Given I open browser at "http://www.my-website.com/"      \033[1;30m# tests/functional/output_features/fail_outline/fail_outline_steps.py:21\033[0m\n'
-        '\033[0;36m    And click on "sign-up"                                    \033[1;30m# tests/functional/output_features/fail_outline/fail_outline_steps.py:25\033[0m\n'
-        '\033[0;36m    When I fill the field "username" with "<username>"        \033[1;30m# tests/functional/output_features/fail_outline/fail_outline_steps.py:29\033[0m\n'
-        '\033[0;36m    And I fill the field "password" with "<password>"         \033[1;30m# tests/functional/output_features/fail_outline/fail_outline_steps.py:29\033[0m\n'
-        '\033[0;36m    And I fill the field "password-confirm" with "<password>" \033[1;30m# tests/functional/output_features/fail_outline/fail_outline_steps.py:29\033[0m\n'
-        '\033[0;36m    And I fill the field "email" with "<email>"               \033[1;30m# tests/functional/output_features/fail_outline/fail_outline_steps.py:29\033[0m\n'
-        '\033[0;36m    And I click "done"                                        \033[1;30m# tests/functional/output_features/fail_outline/fail_outline_steps.py:33\033[0m\n'
-        '\033[0;36m    Then I see the message "<message>"                        \033[1;30m# tests/functional/output_features/fail_outline/fail_outline_steps.py:37\033[0m\n'
+        '#{bold}#{white}  Scenario Outline: fill a web form                           #{bold}#{black}# tests/functional/output_features/fail_outline/fail_outline.feature:6#{reset}\n'
+        '#{reset}#{cyan}    Given I open browser at "http://www.my-website.com/"      #{bold}#{black}# tests/functional/output_features/fail_outline/fail_outline_steps.py:21#{reset}\n'
+        '#{reset}#{cyan}    And click on "sign-up"                                    #{bold}#{black}# tests/functional/output_features/fail_outline/fail_outline_steps.py:25#{reset}\n'
+        '#{reset}#{cyan}    When I fill the field "username" with "<username>"        #{bold}#{black}# tests/functional/output_features/fail_outline/fail_outline_steps.py:29#{reset}\n'
+        '#{reset}#{cyan}    And I fill the field "password" with "<password>"         #{bold}#{black}# tests/functional/output_features/fail_outline/fail_outline_steps.py:29#{reset}\n'
+        '#{reset}#{cyan}    And I fill the field "password-confirm" with "<password>" #{bold}#{black}# tests/functional/output_features/fail_outline/fail_outline_steps.py:29#{reset}\n'
+        '#{reset}#{cyan}    And I fill the field "email" with "<email>"               #{bold}#{black}# tests/functional/output_features/fail_outline/fail_outline_steps.py:29#{reset}\n'
+        '#{reset}#{cyan}    And I click "done"                                        #{bold}#{black}# tests/functional/output_features/fail_outline/fail_outline_steps.py:33#{reset}\n'
+        '#{reset}#{cyan}    Then I see the message "<message>"                        #{bold}#{black}# tests/functional/output_features/fail_outline/fail_outline_steps.py:37#{reset}\n'
         '\n'
-        '\033[1;37m  Examples:\033[0m\n'
-        '\033[0;36m   \033[1;37m |\033[0;36m username\033[1;37m |\033[0;36m password\033[1;37m |\033[0;36m email         \033[1;37m |\033[0;36m message      \033[1;37m |\033[0;36m\033[0m\n'
-        '\033[1;32m   \033[1;37m |\033[1;32m john    \033[1;37m |\033[1;32m doe-1234\033[1;37m |\033[1;32m john@gmail.org\033[1;37m |\033[1;32m Welcome, John\033[1;37m |\033[1;32m\033[0m\n'
-        '\033[1;32m   \033[1;37m |\033[1;32m mary    \033[1;37m |\033[1;32m wee-9876\033[1;37m |\033[1;32m mary@email.com\033[1;37m |\033[1;32m Welcome, Mary\033[1;37m |\033[1;32m\033[0m\n'
-        "\033[1;31m    Traceback (most recent call last):\n"
+        '#{bold}#{white}  Examples:#{reset}\n'
+        '#{reset}#{cyan}   #{bold}#{white} |#{reset}#{cyan} username#{bold}#{white} |#{reset}#{cyan} password#{bold}#{white} |#{reset}#{cyan} email         #{bold}#{white} |#{reset}#{cyan} message      #{bold}#{white} |#{reset}#{cyan}#{reset}\n'
+        '#{bold}#{green}   #{bold}#{white} |#{bold}#{green} john    #{bold}#{white} |#{bold}#{green} doe-1234#{bold}#{white} |#{bold}#{green} john@gmail.org#{bold}#{white} |#{bold}#{green} Welcome, John#{bold}#{white} |#{bold}#{green}#{reset}\n'
+        '#{bold}#{green}   #{bold}#{white} |#{bold}#{green} mary    #{bold}#{white} |#{bold}#{green} wee-9876#{bold}#{white} |#{bold}#{green} mary@email.com#{bold}#{white} |#{bold}#{green} Welcome, Mary#{bold}#{white} |#{bold}#{green}#{reset}\n'
+        "#{bold}#{red}    Traceback (most recent call last):\n"
         '      File "%(lettuce_core_file)s", line %(call_line)d, in __call__\n'
         "        ret = self.function(self.step, *args, **kw)\n"
         '      File "%(step_file)s", line 30, in when_i_fill_the_field_x_with_y\n'
         "        if field == 'password' and value == 'wee-9876':  assert False\n"
-        "    AssertionError\033[0m\n"
-        '\033[1;32m   \033[1;37m |\033[1;32m foo     \033[1;37m |\033[1;32m foo-bar \033[1;37m |\033[1;32m foo@bar.com   \033[1;37m |\033[1;32m Welcome, Foo \033[1;37m |\033[1;32m\033[0m\n'
+        "    AssertionError#{reset}\n"
+        '#{bold}#{green}   #{bold}#{white} |#{bold}#{green} foo     #{bold}#{white} |#{bold}#{green} foo-bar #{bold}#{white} |#{bold}#{green} foo@bar.com   #{bold}#{white} |#{bold}#{green} Welcome, Foo #{bold}#{white} |#{bold}#{green}#{reset}\n'
         '\n'
-        "\033[1;37m1 feature (\033[0;31m0 passed\033[1;37m)\033[0m\n" \
-        "\033[1;37m3 scenarios (\033[1;32m2 passed\033[1;37m)\033[0m\n" \
-        "\033[1;37m24 steps (\033[0;31m1 failed\033[1;37m, \033[0;36m4 skipped\033[1;37m, \033[1;32m19 passed\033[1;37m)\033[0m\n" % {
+        "#{bold}#{white}1 feature (#{reset}#{red}0 passed#{bold}#{white})#{reset}\n" \
+        "#{bold}#{white}3 scenarios (#{bold}#{green}2 passed#{bold}#{white})#{reset}\n" \
+        "#{bold}#{white}24 steps (#{reset}#{red}1 failed#{bold}#{white}, #{reset}#{cyan}4 skipped#{bold}#{white}, #{bold}#{green}19 passed#{bold}#{white})#{reset}\n" % {
             'lettuce_core_file': lettuce_path('core.py'),
             'step_file': abspath(lettuce_path('..', 'tests', 'functional', 'output_features', 'fail_outline', 'fail_outline_steps.py')),
             'call_line':call_line,
@@ -667,23 +667,23 @@ def test_output_snippets_with_groups_within_double_quotes_colorful():
 
     assert_stdout_lines(
         u'\n'
-        u'\033[1;37mFeature: double-quoted snippet proposal                          \033[1;30m# tests/functional/output_features/double-quoted-snippet/double-quoted-snippet.feature:1\033[0m\n'
+        u'#{bold}#{white}Feature: double-quoted snippet proposal                          #{bold}#{black}# tests/functional/output_features/double-quoted-snippet/double-quoted-snippet.feature:1#{reset}\n'
         u'\n'
-        u'\033[1;37m  Scenario: Propose matched groups                               \033[1;30m# tests/functional/output_features/double-quoted-snippet/double-quoted-snippet.feature:2\033[0m\n'
-        u'\033[0;33m    Given I have "stuff here" and "more @#$%ˆ& bizar sutff h3r3" \033[1;30m# tests/functional/output_features/double-quoted-snippet/double-quoted-snippet.feature:3\033[0m\n'
+        u'#{bold}#{white}  Scenario: Propose matched groups                               #{bold}#{black}# tests/functional/output_features/double-quoted-snippet/double-quoted-snippet.feature:2#{reset}\n'
+        u'#{reset}#{yellow}    Given I have "stuff here" and "more @#$%ˆ& bizar sutff h3r3" #{bold}#{black}# tests/functional/output_features/double-quoted-snippet/double-quoted-snippet.feature:3#{reset}\n'
         u'\n'
-        "\033[1;37m1 feature (\033[0;31m0 passed\033[1;37m)\033[0m\n" \
-        "\033[1;37m1 scenario (\033[0;31m0 passed\033[1;37m)\033[0m\n" \
-        "\033[1;37m1 step (\033[0;33m1 undefined\033[1;37m, \033[1;32m0 passed\033[1;37m)\033[0m\n"
+        "#{bold}#{white}1 feature (#{reset}#{red}0 passed#{bold}#{white})#{reset}\n" \
+        "#{bold}#{white}1 scenario (#{reset}#{red}0 passed#{bold}#{white})#{reset}\n" \
+        "#{bold}#{white}1 step (#{reset}#{yellow}1 undefined#{bold}#{white}, #{bold}#{green}0 passed#{bold}#{white})#{reset}\n"
         u'\n'
-        u'\033[0;33mYou can implement step definitions for undefined steps with these snippets:\n'
+        u'#{reset}#{yellow}You can implement step definitions for undefined steps with these snippets:\n'
         u'\n'
         u"# -*- coding: utf-8 -*-\n"
         u'from lettuce import step\n'
         u'\n'
         u'@step(u\'Given I have "(.*)" and "(.*)"\')\n'
         u'def given_i_have_group1_and_group2(step, group1, group2):\n'
-        u'    pass\033[0m\n'
+        u'    pass#{reset}\n'
     )
 
 
@@ -724,23 +724,23 @@ def test_output_snippets_with_groups_within_single_quotes_colorful():
 
     assert_stdout_lines(
         u'\n'
-        u'\033[1;37mFeature: single-quoted snippet proposal                          \033[1;30m# tests/functional/output_features/single-quoted-snippet/single-quoted-snippet.feature:1\033[0m\n'
+        u'#{bold}#{white}Feature: single-quoted snippet proposal                          #{bold}#{black}# tests/functional/output_features/single-quoted-snippet/single-quoted-snippet.feature:1#{reset}\n'
         u'\n'
-        u'\033[1;37m  Scenario: Propose matched groups                               \033[1;30m# tests/functional/output_features/single-quoted-snippet/single-quoted-snippet.feature:2\033[0m\n'
-        u'\033[0;33m    Given I have \'stuff here\' and \'more @#$%ˆ& bizar sutff h3r3\' \033[1;30m# tests/functional/output_features/single-quoted-snippet/single-quoted-snippet.feature:3\033[0m\n'
+        u'#{bold}#{white}  Scenario: Propose matched groups                               #{bold}#{black}# tests/functional/output_features/single-quoted-snippet/single-quoted-snippet.feature:2#{reset}\n'
+        u'#{reset}#{yellow}    Given I have \'stuff here\' and \'more @#$%ˆ& bizar sutff h3r3\' #{bold}#{black}# tests/functional/output_features/single-quoted-snippet/single-quoted-snippet.feature:3#{reset}\n'
         u'\n'
-        "\033[1;37m1 feature (\033[0;31m0 passed\033[1;37m)\033[0m\n" \
-        "\033[1;37m1 scenario (\033[0;31m0 passed\033[1;37m)\033[0m\n" \
-        "\033[1;37m1 step (\033[0;33m1 undefined\033[1;37m, \033[1;32m0 passed\033[1;37m)\033[0m\n"
+        "#{bold}#{white}1 feature (#{reset}#{red}0 passed#{bold}#{white})#{reset}\n" \
+        "#{bold}#{white}1 scenario (#{reset}#{red}0 passed#{bold}#{white})#{reset}\n" \
+        "#{bold}#{white}1 step (#{reset}#{yellow}1 undefined#{bold}#{white}, #{bold}#{green}0 passed#{bold}#{white})#{reset}\n"
         u'\n'
-        u'\033[0;33mYou can implement step definitions for undefined steps with these snippets:\n'
+        u'#{reset}#{yellow}You can implement step definitions for undefined steps with these snippets:\n'
         u'\n'
         u"# -*- coding: utf-8 -*-\n"
         u'from lettuce import step\n'
         u'\n'
         u'@step(u\'Given I have \\\'(.*)\\\' and \\\'(.*)\\\'\')\n'
         u'def given_i_have_group1_and_group2(step, group1, group2):\n'
-        u'    pass\033[0m\n'
+        u'    pass#{reset}\n'
     )
 
 @with_setup(prepare_stdout)

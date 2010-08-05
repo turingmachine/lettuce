@@ -17,10 +17,13 @@
 import os
 import re
 import sys
+import couleur
 from lettuce import strings
 from lettuce import core
 from lettuce.terrain import after
 from lettuce.terrain import before
+
+couleur.proxy(sys.stdout).enable()
 
 def wrt(what):
     sys.stdout.write(what.encode('utf-8'))
@@ -29,16 +32,16 @@ def wrap_file_and_line(string, start, end):
     return re.sub(r'([#] [^:]+[:]\d+)', '%s\g<1>%s' % (start, end), string)
 
 def wp(l):
-    if l.startswith("\033[1;32m"):
-        l = l.replace(" |", "\033[1;37m |\033[1;32m")
-    if l.startswith("\033[1;36m"):
-        l = l.replace(" |", "\033[1;37m |\033[1;36m")
-    if l.startswith("\033[0;36m"):
-        l = l.replace(" |", "\033[1;37m |\033[0;36m")
-    if l.startswith("\033[0;31m"):
-        l = l.replace(" |", "\033[1;37m |\033[0;31m")
-    if l.startswith("\033[1;30m"):
-        l = l.replace(" |", "\033[1;37m |\033[1;30m")
+    if l.startswith("#{bold}#{green}"):
+        l = l.replace(" |", "#{bold}#{white} |#{bold}#{green}")
+    if l.startswith("#{bold}#{cyan}"):
+        l = l.replace(" |", "#{bold}#{white} |#{bold}#{cyan}")
+    if l.startswith("#{reset}#{cyan}"):
+        l = l.replace(" |", "#{bold}#{white} |#{reset}#{cyan}")
+    if l.startswith("#{reset}#{red}"):
+        l = l.replace(" |", "#{bold}#{white} |#{reset}#{red}")
+    if l.startswith("#{bold}#{black}"):
+        l = l.replace(" |", "#{bold}#{white} |#{bold}#{black}")
 
     return l
 
@@ -50,17 +53,17 @@ def print_step_running(step):
     if not step.defined_at:
         return
 
-    color = '\033[1;30m'
+    color = '#{bold}#{black}'
 
     if step.scenario.outlines:
-        color = '\033[0;36m'
+        color = '#{reset}#{cyan}'
 
     string = step.represent_string(step.original_sentence)
-    string = wrap_file_and_line(string, '\033[1;30m', '\033[0m')
+    string = wrap_file_and_line(string, '#{bold}#{black}', '#{reset}')
     write_out("%s%s" % (color, string))
     if step.hashes:
         for line in step.represent_hashes().splitlines():
-            write_out("\033[1;30m%s\033[0m\n" % line)
+            write_out("#{bold}#{black}%s#{reset}\n" % line)
 
 @after.each_step
 def print_step_ran(step):
@@ -68,38 +71,38 @@ def print_step_ran(step):
         return
 
     if step.hashes:
-        write_out("\033[A" * (len(step.hashes) + 1))
+        write_out("#{up}" * (len(step.hashes) + 1))
 
     string = step.represent_string(step.original_sentence)
 
     if not step.failed:
-        string = wrap_file_and_line(string, '\033[1;30m', '\033[0m')
+        string = wrap_file_and_line(string, '#{bold}#{black}', '#{reset}')
 
 
-    prefix = '\033[A'
+    prefix = '#{up}'
 
     if step.failed:
-        color = "\033[0;31m"
-        string = wrap_file_and_line(string, '\033[1;41;33m', '\033[0m')
+        color = "#{reset}#{red}"
+        string = wrap_file_and_line(string, '#{bold}#{red}#{on:yellow}', '#{reset}')
 
     elif step.passed:
-        color = "\033[1;32m"
+        color = "#{bold}#{green}"
 
     elif step.defined_at:
-        color = "\033[0;36m"
+        color = "#{reset}#{cyan}"
 
     else:
-        color = "\033[0;33m"
+        color = "#{reset}#{yellow}"
         prefix = ""
 
     write_out("%s%s%s" % (prefix, color, string))
 
     if step.hashes:
         for line in step.represent_hashes().splitlines():
-            write_out("%s%s\033[0m\n" % (color, line))
+            write_out("%s%s#{reset}\n" % (color, line))
 
     if step.failed:
-        wrt("\033[1;31m")
+        wrt("#{bold}#{red}")
         pspaced = lambda x: wrt("%s%s" % (" " * step.indentation, x))
         lines = step.why.traceback.splitlines()
 
@@ -108,13 +111,13 @@ def print_step_ran(step):
             if pindex + 1 < len(lines):
                 wrt("\n")
 
-        wrt("\033[0m\n")
+        wrt("#{reset}\n")
 
 @before.each_scenario
 def print_scenario_running(scenario):
     string = scenario.represented()
-    string = wrap_file_and_line(string, '\033[1;30m', '\033[0m')
-    write_out("\033[1;37m%s" % string)
+    string = wrap_file_and_line(string, '#{bold}#{black}', '#{reset}')
+    write_out("#{bold}#{white}%s" % string)
 
 @after.outline
 def print_outline(scenario, order, outline, reasons_to_fail):
@@ -122,25 +125,25 @@ def print_outline(scenario, order, outline, reasons_to_fail):
     lines = table.splitlines()
     head = lines.pop(0)
 
-    wline = lambda x: write_out("\033[0;36m%s%s\033[0m\n" % (" " * scenario.table_indentation, x))
-    wline_success = lambda x: write_out("\033[1;32m%s%s\033[0m\n" % (" " * scenario.table_indentation, x))
+    wline = lambda x: write_out("#{reset}#{cyan}%s%s#{reset}\n" % (" " * scenario.table_indentation, x))
+    wline_success = lambda x: write_out("#{bold}#{green}%s%s#{reset}\n" % (" " * scenario.table_indentation, x))
     wline_red = lambda x: wrt("%s%s" % (" " * scenario.table_indentation, x))
     if order is 0:
         wrt("\n")
-        wrt("\033[1;37m%s%s:\033[0m\n" % (" " * scenario.indentation, scenario.language.first_of_examples))
+        wrt("#{bold}#{white}%s%s:#{reset}\n" % (" " * scenario.indentation, scenario.language.first_of_examples))
         wline(head)
 
     line = lines[order]
     wline_success(line)
     if reasons_to_fail:
         elines = reasons_to_fail[0].traceback.splitlines()
-        wrt("\033[1;31m")
+        wrt("#{bold}#{red}")
         for pindex, line in enumerate(elines):
             wline_red(line)
             if pindex + 1 < len(elines):
                 wrt("\n")
 
-        wrt("\033[0m\n")
+        wrt("#{reset}\n")
 
 @before.each_feature
 def print_feature_running(feature):
@@ -149,8 +152,8 @@ def print_feature_running(feature):
 
     write_out("\n")
     for line in lines:
-        line = wrap_file_and_line(line, '\033[1;30m', '\033[0m')
-        write_out("\033[1;37m%s\n" % line)
+        line = wrap_file_and_line(line, '#{bold}#{black}', '#{reset}')
+        write_out("#{bold}#{white}%s\n" % line)
 
     write_out("\n")
 
@@ -160,11 +163,11 @@ def print_end(total):
 
     word = total.features_ran > 1 and "features" or "feature"
 
-    color = "\033[1;32m"
+    color = "#{bold}#{green}"
     if total.features_passed is 0:
-        color = "\033[0;31m"
+        color = "#{reset}#{red}"
 
-    write_out("\033[1;37m%d %s (%s%d passed\033[1;37m)\033[0m\n" % (
+    write_out("#{bold}#{white}%d %s (%s%d passed#{bold}#{white})#{reset}\n" % (
         total.features_ran,
         word,
         color,
@@ -172,12 +175,12 @@ def print_end(total):
         )
     )
 
-    color = "\033[1;32m"
+    color = "#{bold}#{green}"
     if total.scenarios_passed is 0:
-        color = "\033[0;31m"
+        color = "#{reset}#{red}"
 
     word = total.scenarios_ran > 1 and "scenarios" or "scenario"
-    write_out("\033[1;37m%d %s (%s%d passed\033[1;37m)\033[0m\n" % (
+    write_out("#{bold}#{white}%d %s (%s%d passed#{bold}#{white})#{reset}\n" % (
         total.scenarios_ran,
         word,
         color,
@@ -187,9 +190,9 @@ def print_end(total):
 
     steps_details = []
     kinds_and_colors = {
-        'failed': '\033[0;31m',
-        'skipped': '\033[0;36m',
-        'undefined': '\033[0;33m'
+        'failed': '#{reset}#{red}',
+        'skipped': '#{reset}#{cyan}',
+        'undefined': '#{reset}#{yellow}'
     }
 
 
@@ -201,12 +204,12 @@ def print_end(total):
                 "%s%d %s" % (color, stotal, kind)
             )
 
-    steps_details.append("\033[1;32m%d passed\033[1;37m" % total.steps_passed)
+    steps_details.append("#{bold}#{green}%d passed#{bold}#{white}" % total.steps_passed)
     word = total.steps > 1 and "steps" or "step"
-    content = "\033[1;37m, ".join(steps_details)
+    content = "#{bold}#{white}, ".join(steps_details)
 
     word = total.steps > 1 and "steps" or "step"
-    write_out("\033[1;37m%d %s (%s)\033[0m\n" % (
+    write_out("#{bold}#{white}%d %s (%s)#{reset}\n" % (
         total.steps,
         word,
         content
@@ -214,7 +217,7 @@ def print_end(total):
     )
 
     if total.proposed_definitions:
-        wrt("\n\033[0;33mYou can implement step definitions for undefined steps with these snippets:\n\n")
+        wrt("\n#{reset}#{yellow}You can implement step definitions for undefined steps with these snippets:\n\n")
         wrt("# -*- coding: utf-8 -*-\n")
         wrt("from lettuce import step\n\n")
 
@@ -225,17 +228,19 @@ def print_end(total):
             wrt("def %s:\n" % method_name)
             wrt("    pass")
             if current is last:
-                wrt("\033[0m")
+                wrt("#{reset}")
 
             wrt("\n")
+
+    couleur.proxy(sys.stdout).disable()
 
 def print_no_features_found(where):
     where = core.fs.relpath(where)
     if not where.startswith(os.sep):
         where = '.%s%s' % (os.sep, where)
 
-    write_out('\033[1;31mOops!\033[0m\n')
+    write_out('#{bold}#{red}Oops!#{reset}\n')
     write_out(
-        '\033[1;37mcould not find features at '
-        '\033[1;33m%s\033[0m\n' % where
+        '#{bold}#{white}could not find features at '
+        '#{bold}#{yellow}%s#{reset}\n' % where
     )

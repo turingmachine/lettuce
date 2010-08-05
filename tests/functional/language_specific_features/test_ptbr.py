@@ -40,7 +40,7 @@ def test_output_with_success_colorless():
         u"\n"
         u"  Cenário: Fazer nada               # tests/functional/language_specific_features/pt-br/success/dumb.feature:8\n"
         u"    Dado que eu faço nada           # tests/functional/language_specific_features/pt-br/success/dumb_steps.py:6\n"
-        u"\033[A    Dado que eu faço nada           # tests/functional/language_specific_features/pt-br/success/dumb_steps.py:6\n"
+        u"#{up}    Dado que eu faço nada           # tests/functional/language_specific_features/pt-br/success/dumb_steps.py:6\n"
         u"\n"
         u"1 feature (1 passed)\n"
         u"1 scenario (1 passed)\n"
@@ -66,7 +66,7 @@ def test_output_of_table_with_success_colorless():
         u"      | id | description  |\n"
         u"      | 12 | some desc    |\n"
         u"      | 64 | another desc |\n"
-        u"\033[A\033[A\033[A\033[A    Dado que eu brinco com os seguintes itens: # tests/functional/language_specific_features/pt-br/success/table_steps.py:6\n"
+        u"#{up}#{up}#{up}#{up}    Dado que eu brinco com os seguintes itens: # tests/functional/language_specific_features/pt-br/success/table_steps.py:6\n"
         u"      | id | description  |\n"
         u"      | 12 | some desc    |\n"
         u"      | 64 | another desc |\n"
@@ -115,24 +115,24 @@ def test_output_outlines_success_colorful():
 
     assert_stdout_lines(
         u'\n'
-        u'\033[1;37mFuncionalidade: outlines em português                                  \033[1;30m# tests/functional/language_specific_features/pt-br/success/outlines.feature:3\033[0m\n'
-        u'\033[1;37m  Como um programador                                                  \033[1;30m# tests/functional/language_specific_features/pt-br/success/outlines.feature:4\033[0m\n'
-        u'\033[1;37m  Eu quero testar cenários esquemáticos                                \033[1;30m# tests/functional/language_specific_features/pt-br/success/outlines.feature:5\033[0m\n'
-        u'\033[1;37m  Para ver o output em pt-br                                           \033[1;30m# tests/functional/language_specific_features/pt-br/success/outlines.feature:6\033[0m\n'
+        u'#{bold}#{white}Funcionalidade: outlines em português                                  #{bold}#{black}# tests/functional/language_specific_features/pt-br/success/outlines.feature:3#{reset}\n'
+        u'#{bold}#{white}  Como um programador                                                  #{bold}#{black}# tests/functional/language_specific_features/pt-br/success/outlines.feature:4#{reset}\n'
+        u'#{bold}#{white}  Eu quero testar cenários esquemáticos                                #{bold}#{black}# tests/functional/language_specific_features/pt-br/success/outlines.feature:5#{reset}\n'
+        u'#{bold}#{white}  Para ver o output em pt-br                                           #{bold}#{black}# tests/functional/language_specific_features/pt-br/success/outlines.feature:6#{reset}\n'
         u'\n'
-        u'\033[1;37m  Esquema do Cenário: Fazer nada, repetidas vezes, através de esquemas \033[1;30m# tests/functional/language_specific_features/pt-br/success/outlines.feature:8\033[0m\n'
-        u'\033[0;36m    Dado que tenho o <dado1>                                           \033[1;30m# tests/functional/language_specific_features/pt-br/success/outlines_steps.py:13\033[0m\n'
-        u'\033[0;36m    Quando eu faço algo com <isso>                                     \033[1;30m# tests/functional/language_specific_features/pt-br/success/outlines_steps.py:22\033[0m\n'
-        u'\033[0;36m    Então eu fico feliz em ver <aquilo>                                \033[1;30m# tests/functional/language_specific_features/pt-br/success/outlines_steps.py:31\033[0m\n'
+        u'#{bold}#{white}  Esquema do Cenário: Fazer nada, repetidas vezes, através de esquemas #{bold}#{black}# tests/functional/language_specific_features/pt-br/success/outlines.feature:8#{reset}\n'
+        u'#{reset}#{cyan}    Dado que tenho o <dado1>                                           #{bold}#{black}# tests/functional/language_specific_features/pt-br/success/outlines_steps.py:13#{reset}\n'
+        u'#{reset}#{cyan}    Quando eu faço algo com <isso>                                     #{bold}#{black}# tests/functional/language_specific_features/pt-br/success/outlines_steps.py:22#{reset}\n'
+        u'#{reset}#{cyan}    Então eu fico feliz em ver <aquilo>                                #{bold}#{black}# tests/functional/language_specific_features/pt-br/success/outlines_steps.py:31#{reset}\n'
         u'\n'
-        u'\033[1;37m  Exemplos:\033[0m\n'
-        u'\033[0;36m   \033[1;37m |\033[0;36m dado1\033[1;37m |\033[0;36m isso       \033[1;37m |\033[0;36m aquilo       \033[1;37m |\033[0;36m\033[0m\n'
-        u'\033[1;32m   \033[1;37m |\033[1;32m algo \033[1;37m |\033[1;32m assim      \033[1;37m |\033[1;32m funcional    \033[1;37m |\033[1;32m\033[0m\n'
-        u'\033[1;32m   \033[1;37m |\033[1;32m outro\033[1;37m |\033[1;32m aqui       \033[1;37m |\033[1;32m também       \033[1;37m |\033[1;32m\033[0m\n'
-        u'\033[1;32m   \033[1;37m |\033[1;32m dados\033[1;37m |\033[1;32m funcionarão\033[1;37m |\033[1;32m com unicode !\033[1;37m |\033[1;32m\033[0m\n'
+        u'#{bold}#{white}  Exemplos:#{reset}\n'
+        u'#{reset}#{cyan}   #{bold}#{white} |#{reset}#{cyan} dado1#{bold}#{white} |#{reset}#{cyan} isso       #{bold}#{white} |#{reset}#{cyan} aquilo       #{bold}#{white} |#{reset}#{cyan}#{reset}\n'
+        u'#{bold}#{green}   #{bold}#{white} |#{bold}#{green} algo #{bold}#{white} |#{bold}#{green} assim      #{bold}#{white} |#{bold}#{green} funcional    #{bold}#{white} |#{bold}#{green}#{reset}\n'
+        u'#{bold}#{green}   #{bold}#{white} |#{bold}#{green} outro#{bold}#{white} |#{bold}#{green} aqui       #{bold}#{white} |#{bold}#{green} também       #{bold}#{white} |#{bold}#{green}#{reset}\n'
+        u'#{bold}#{green}   #{bold}#{white} |#{bold}#{green} dados#{bold}#{white} |#{bold}#{green} funcionarão#{bold}#{white} |#{bold}#{green} com unicode !#{bold}#{white} |#{bold}#{green}#{reset}\n'
         u'\n'
-        u"\033[1;37m1 feature (\033[1;32m1 passed\033[1;37m)\033[0m\n" \
-        u"\033[1;37m3 scenarios (\033[1;32m3 passed\033[1;37m)\033[0m\n" \
-        u"\033[1;37m9 steps (\033[1;32m9 passed\033[1;37m)\033[0m\n"
+        u"#{bold}#{white}1 feature (#{bold}#{green}1 passed#{bold}#{white})#{reset}\n" \
+        u"#{bold}#{white}3 scenarios (#{bold}#{green}3 passed#{bold}#{white})#{reset}\n" \
+        u"#{bold}#{white}9 steps (#{bold}#{green}9 passed#{bold}#{white})#{reset}\n"
     )
 
