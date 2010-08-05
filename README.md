@@ -1,12 +1,12 @@
 # lettuce
-> Version 0.1.14 - barium
+> Version 0.2 - emerald
 
 ## On release names
 
 Lettuce release names will be inspired by any green stuff.
 
-Barium: In form of "barium nitrate" is commonly used to make green fireworks. Such a good name for a first version :)
-
+Barium: In form of "barium nitrate" is commonly used to make green fireworks. Such a good name for a first version.
+Emerald: This gemstone is gorgeously green after passing through a cut. Lettuce's second release is pretty much about cutting.
 # What
 
 Lettuce is a BDD tool for python, 100% inspired on [cucumber](http://cukes.info/ "BDD with elegance and joy").
@@ -37,6 +37,8 @@ all them are used within lettuce tests
     > [sudo] pip install lxml
 * [django](http://djangoproject.com/)
     > [sudo] pip install django
+* [couleur](http://github.com/gabrielfalcao/couleur/)
+    > [sudo] pip install couleur
 
 # Contributing
 
