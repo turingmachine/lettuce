@@ -20,8 +20,8 @@ from lettuce.core import Feature
 from nose.tools import assert_equals
 
 FEATURE1 = """
-Feature: Rent movies
-    Scenario: Renting a featured movie
+Feature:    Rent movies
+    Scenario:    Renting a featured movie
         Given I have the following movies in my database
            | Name                    | Rating  | New | Available |
            | Matrix Revolutions      | 4 stars | no  | 6         |

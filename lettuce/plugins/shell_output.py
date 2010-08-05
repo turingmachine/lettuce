@@ -37,10 +37,10 @@ def print_step_ran(step):
         return
 
     if step.hashes:
-        wrt("\033[A" * (len(step.hashes) + 1))
+        wrt("#{up}" * (len(step.hashes) + 1))
 
     if step.defined_at:
-        wrt("\033[A" + step.represent_string(step.original_sentence))
+        wrt("#{up}" + step.represent_string(step.original_sentence))
 
     else:
         wrt(step.represent_string(step.original_sentence).rstrip() + " (undefined)\n")
