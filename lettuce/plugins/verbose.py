@@ -17,13 +17,10 @@
 import os
 import re
 import sys
-import couleur
 from lettuce import strings
 from lettuce import core
 from lettuce.terrain import after
 from lettuce.terrain import before
-
-couleur.proxy(sys.stdout).enable()
 
 def wrt(what):
     sys.stdout.write(what.encode('utf-8'))
@@ -231,8 +228,6 @@ def print_end(total):
                 wrt("#{reset}")
 
             wrt("\n")
-
-    couleur.proxy(sys.stdout).disable()
 
 def print_no_features_found(where):
     where = core.fs.relpath(where)

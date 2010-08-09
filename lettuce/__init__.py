@@ -20,7 +20,7 @@ release = 'barium'
 
 import os
 import sys
-
+import couleur
 from lettuce import fs
 from lettuce.core import Feature, TotalResult
 
@@ -74,14 +74,18 @@ class Runner(object):
 
         sys.path.remove(base_path)
 
+        color_proxy = couleur.proxy(sys.stdout)
+
         if verbosity is 0:
             from lettuce.plugins import non_verbose as output
-        elif verbosity is 3:
-            from lettuce.plugins import shell_output as output
         else:
-            from lettuce.plugins import colored_shell_output as output
+            from lettuce.plugins import verbose as output
+            color_proxy.enable()
 
         reload(output)
+
+        if verbosity is 3:
+            color_proxy.ignore()
 
         self.output = output
 

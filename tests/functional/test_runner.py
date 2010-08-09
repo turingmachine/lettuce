@@ -15,6 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import os
+import sys
+import couleur
 import lettuce
 
 from StringIO import StringIO
@@ -150,7 +152,6 @@ def test_output_with_success_colorless():
         "\n"
         "  Scenario: Do nothing                   # tests/functional/output_features/runner_features/first.feature:6\n"
         "    Given I do nothing                   # tests/functional/output_features/runner_features/dumb_steps.py:6\n"
-        "#{up}    Given I do nothing                   # tests/functional/output_features/runner_features/dumb_steps.py:6\n"
         "\n"
         "1 feature (1 passed)\n"
         "1 scenario (1 passed)\n"
@@ -162,6 +163,7 @@ def test_output_with_success_colorful():
     "Testing the output of a successful feature"
 
     runner = Runner(join(abspath(dirname(__file__)), 'output_features', 'runner_features'), verbosity=4)
+    couleur.proxy(sys.stdout).disable()
     runner.run()
 
     assert_stdout_lines(
@@ -195,18 +197,14 @@ def test_output_with_success_colorless_many_features():
         "\n"
         "  Scenario: Do nothing                       # tests/functional/output_features/many_successful_features/one.feature:6\n"
         "    Given I do nothing                       # tests/functional/output_features/many_successful_features/dumb_steps.py:6\n"
-        "#{up}    Given I do nothing                       # tests/functional/output_features/many_successful_features/dumb_steps.py:6\n"
         "    Then I see that the test passes          # tests/functional/output_features/many_successful_features/dumb_steps.py:8\n"
-        "#{up}    Then I see that the test passes          # tests/functional/output_features/many_successful_features/dumb_steps.py:8\n"
         "\n"
         "Feature: Second feature, of many    # tests/functional/output_features/many_successful_features/two.feature:1\n"
         "  I just want to see it green :)    # tests/functional/output_features/many_successful_features/two.feature:2\n"
         "\n"
         "  Scenario: Do nothing              # tests/functional/output_features/many_successful_features/two.feature:4\n"
         "    Given I do nothing              # tests/functional/output_features/many_successful_features/dumb_steps.py:6\n"
-        "#{up}    Given I do nothing              # tests/functional/output_features/many_successful_features/dumb_steps.py:6\n"
         "    Then I see that the test passes # tests/functional/output_features/many_successful_features/dumb_steps.py:8\n"
-        "#{up}    Then I see that the test passes # tests/functional/output_features/many_successful_features/dumb_steps.py:8\n"
         "\n"
         "2 features (2 passed)\n"
         "2 scenarios (2 passed)\n"
@@ -218,6 +216,7 @@ def test_output_with_success_colorful_many_features():
     "Testing the colorful output of many successful features"
 
     runner = Runner(join(abspath(dirname(__file__)), 'output_features', 'many_successful_features'), verbosity=4)
+    couleur.proxy(sys.stdout).disable()
     runner.run()
 
     assert_stdout_lines(
@@ -253,6 +252,7 @@ def test_output_when_could_not_find_features():
 
     path = fs.relpath(join(abspath(dirname(__file__)), 'unexistent-folder'))
     runner = Runner(path, verbosity=4)
+    couleur.proxy(sys.stdout).disable()
     runner.run()
 
     assert_stdout_lines(
@@ -286,23 +286,13 @@ def test_output_with_success_colorless_with_table():
         '\n'
         '  Scenario: Add two numbers      # tests/functional/output_features/success_table/success_table.feature:2\n'
         '    Given I have 0 bucks         # tests/functional/output_features/success_table/success_table_steps.py:28\n'
-        '#{up}    Given I have 0 bucks         # tests/functional/output_features/success_table/success_table_steps.py:28\n'
         '    And that I have these items: # tests/functional/output_features/success_table/success_table_steps.py:32\n'
         '      | name    | price  |\n'
         '      | Porsche | 200000 |\n'
         '      | Ferrari | 400000 |\n'
-        '#{up}#{up}#{up}#{up}    And that I have these items: # tests/functional/output_features/success_table/success_table_steps.py:32\n'
-        '      | name    | price  |\n'
-        '      | Porsche | 200000 |\n'
-        '      | Ferrari | 400000 |\n'
         '    When I sell the "Ferrari"    # tests/functional/output_features/success_table/success_table_steps.py:42\n'
-        '#{up}    When I sell the "Ferrari"    # tests/functional/output_features/success_table/success_table_steps.py:42\n'
         '    Then I have 400000 bucks     # tests/functional/output_features/success_table/success_table_steps.py:28\n'
-        '#{up}    Then I have 400000 bucks     # tests/functional/output_features/success_table/success_table_steps.py:28\n'
         '    And my garage contains:      # tests/functional/output_features/success_table/success_table_steps.py:47\n'
-        '      | name    | price  |\n'
-        '      | Porsche | 200000 |\n'
-        '#{up}#{up}#{up}    And my garage contains:      # tests/functional/output_features/success_table/success_table_steps.py:47\n'
         '      | name    | price  |\n'
         '      | Porsche | 200000 |\n'
         '\n'
@@ -316,6 +306,7 @@ def test_output_with_success_colorful_with_table():
     "Testing the colorful output of success with table"
 
     runner = Runner(feature_name('success_table'), verbosity=4)
+    couleur.proxy(sys.stdout).disable()
     runner.run()
 
     assert_stdout_lines(
@@ -362,9 +353,7 @@ def test_output_with_failed_colorless_with_table():
         "\n"
         "  Scenario: See it fail                       # tests/functional/output_features/failed_table/failed_table.feature:2\n"
         "    Given I have a dumb step that passes      # tests/functional/output_features/failed_table/failed_table_steps.py:20\n"
-        "#{up}    Given I have a dumb step that passes      # tests/functional/output_features/failed_table/failed_table_steps.py:20\n"
         "    And this one fails                        # tests/functional/output_features/failed_table/failed_table_steps.py:24\n"
-        "#{up}    And this one fails                        # tests/functional/output_features/failed_table/failed_table_steps.py:24\n"
         "    Traceback (most recent call last):\n"
         '      File "%(lettuce_core_file)s", line %(call_line)d, in __call__\n'
         "        ret = self.function(self.step, *args, **kw)\n"
@@ -372,10 +361,8 @@ def test_output_with_failed_colorless_with_table():
         "        assert False\n"
         "    AssertionError\n"
         "    Then this one will be skipped             # tests/functional/output_features/failed_table/failed_table_steps.py:28\n"
-        "#{up}    Then this one will be skipped             # tests/functional/output_features/failed_table/failed_table_steps.py:28\n"
         "    And this one will be skipped              # tests/functional/output_features/failed_table/failed_table_steps.py:28\n"
-        "#{up}    And this one will be skipped              # tests/functional/output_features/failed_table/failed_table_steps.py:28\n"
-        "    And this one does not even has definition # tests/functional/output_features/failed_table/failed_table.feature:12 (undefined)\n"
+        "    And this one does not even has definition # tests/functional/output_features/failed_table/failed_table.feature:12\n"
         "\n"
         "1 feature (0 passed)\n"
         "1 scenario (0 passed)\n"
@@ -400,6 +387,7 @@ def test_output_with_failed_colorful_with_table():
     "Testing the colorful output of failed with table"
 
     runner = Runner(feature_name('failed_table'), verbosity=4)
+    couleur.proxy(sys.stdout).disable()
     runner.run()
 
     assert_stdout_lines_with_traceback(
@@ -482,6 +470,7 @@ def test_output_with_successful_outline_colorful():
     "Testing the colorful output of a scenario outline"
 
     runner = Runner(feature_name('success_outline'), verbosity=4)
+    couleur.proxy(sys.stdout).disable()
     runner.run()
 
     assert_stdout_lines_with_traceback(
@@ -562,6 +551,7 @@ def test_output_with_failful_outline_colorful():
     "Testing the colorful output of a scenario outline"
 
     runner = Runner(feature_name('fail_outline'), verbosity=4)
+    couleur.proxy(sys.stdout).disable()
     runner.run()
 
     assert_stdout_lines_with_traceback(
@@ -642,7 +632,7 @@ def test_output_snippets_with_groups_within_double_quotes_colorless():
         u'Feature: double-quoted snippet proposal                          # tests/functional/output_features/double-quoted-snippet/double-quoted-snippet.feature:1\n'
         u'\n'
         u'  Scenario: Propose matched groups                               # tests/functional/output_features/double-quoted-snippet/double-quoted-snippet.feature:2\n'
-        u'    Given I have "stuff here" and "more @#$%ˆ& bizar sutff h3r3" # tests/functional/output_features/double-quoted-snippet/double-quoted-snippet.feature:3 (undefined)\n'
+        u'    Given I have "stuff here" and "more @#$%ˆ& bizar sutff h3r3" # tests/functional/output_features/double-quoted-snippet/double-quoted-snippet.feature:3\n'
         u'\n'
         u'1 feature (0 passed)\n'
         u'1 scenario (0 passed)\n'
@@ -663,6 +653,7 @@ def test_output_snippets_with_groups_within_double_quotes_colorful():
     "Testing that the proposed snippet is clever enough to identify groups within double quotes. colorful"
 
     runner = Runner(feature_name('double-quoted-snippet'), verbosity=4)
+    couleur.proxy(sys.stdout).disable()
     runner.run()
 
     assert_stdout_lines(
@@ -699,7 +690,7 @@ def test_output_snippets_with_groups_within_single_quotes_colorless():
         u'Feature: single-quoted snippet proposal                          # tests/functional/output_features/single-quoted-snippet/single-quoted-snippet.feature:1\n'
         u'\n'
         u'  Scenario: Propose matched groups                               # tests/functional/output_features/single-quoted-snippet/single-quoted-snippet.feature:2\n'
-        u'    Given I have \'stuff here\' and \'more @#$%ˆ& bizar sutff h3r3\' # tests/functional/output_features/single-quoted-snippet/single-quoted-snippet.feature:3 (undefined)\n'
+        u'    Given I have \'stuff here\' and \'more @#$%ˆ& bizar sutff h3r3\' # tests/functional/output_features/single-quoted-snippet/single-quoted-snippet.feature:3\n'
         u'\n'
         u'1 feature (0 passed)\n'
         u'1 scenario (0 passed)\n'
@@ -720,6 +711,7 @@ def test_output_snippets_with_groups_within_single_quotes_colorful():
     "Testing that the proposed snippet is clever enough to identify groups within single quotes. colorful"
 
     runner = Runner(feature_name('single-quoted-snippet'), verbosity=4)
+    couleur.proxy(sys.stdout).disable()
     runner.run()
 
     assert_stdout_lines(
@@ -755,8 +747,8 @@ def test_output_snippets_with_groups_within_redundant_quotes():
         u'Feature: avoid duplicating same snippet                          # tests/functional/output_features/redundant-steps-quotes/redundant-steps-quotes.feature:1\n'
         u'\n'
         u'  Scenario: Propose matched groups                               # tests/functional/output_features/redundant-steps-quotes/redundant-steps-quotes.feature:2\n'
-        u'    Given I have "stuff here" and "more @#$%ˆ& bizar sutff h3r3" # tests/functional/output_features/redundant-steps-quotes/redundant-steps-quotes.feature:3 (undefined)\n'
-        u'    Given I have "blablabla" and "12345"                         # tests/functional/output_features/redundant-steps-quotes/redundant-steps-quotes.feature:4 (undefined)\n'
+        u'    Given I have "stuff here" and "more @#$%ˆ& bizar sutff h3r3" # tests/functional/output_features/redundant-steps-quotes/redundant-steps-quotes.feature:3\n'
+        u'    Given I have "blablabla" and "12345"                         # tests/functional/output_features/redundant-steps-quotes/redundant-steps-quotes.feature:4\n'
         u'\n'
         u'1 feature (0 passed)\n'
         u'1 scenario (0 passed)\n'
@@ -787,9 +779,9 @@ def test_output_snippets_with_normalized_unicode_names():
         u"  Para melhorar, de uma forma geral, a vida do programador                                    # tests/functional/output_features/latin-accents/latin-accents.feature:5\n"
         u"\n"
         u"  Cenário: normalizar snippets com unicode                                                    # tests/functional/output_features/latin-accents/latin-accents.feature:7\n"
-        u"    Dado que eu tenho palavrões e outras situações                                            # tests/functional/output_features/latin-accents/latin-accents.feature:8 (undefined)\n"
-        u"    E várias palavras acentuadas são úteis, tais como: \"(é,não,léo,chororó,chácara,epígrafo)\" # tests/functional/output_features/latin-accents/latin-accents.feature:9 (undefined)\n"
-        u"    Então eu fico felizão                                                                     # tests/functional/output_features/latin-accents/latin-accents.feature:10 (undefined)\n"
+        u"    Dado que eu tenho palavrões e outras situações                                            # tests/functional/output_features/latin-accents/latin-accents.feature:8\n"
+        u"    E várias palavras acentuadas são úteis, tais como: \"(é,não,léo,chororó,chácara,epígrafo)\" # tests/functional/output_features/latin-accents/latin-accents.feature:9\n"
+        u"    Então eu fico felizão                                                                     # tests/functional/output_features/latin-accents/latin-accents.feature:10\n"
         u"\n"
         u"1 feature (0 passed)\n"
         u"1 scenario (0 passed)\n"

@@ -14,6 +14,8 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+import sys
+import couleur
 from os.path import dirname, abspath, join
 from nose.tools import with_setup
 from tests.asserts import prepare_stdout
@@ -40,7 +42,6 @@ def test_output_with_success_colorless():
         u"\n"
         u"  Cenário: Fazer nada               # tests/functional/language_specific_features/pt-br/success/dumb.feature:8\n"
         u"    Dado que eu faço nada           # tests/functional/language_specific_features/pt-br/success/dumb_steps.py:6\n"
-        u"#{up}    Dado que eu faço nada           # tests/functional/language_specific_features/pt-br/success/dumb_steps.py:6\n"
         u"\n"
         u"1 feature (1 passed)\n"
         u"1 scenario (1 passed)\n"
@@ -63,10 +64,6 @@ def test_output_of_table_with_success_colorless():
         u"\n"
         u"  Cenário: Fazer nada, com tabelas :)          # tests/functional/language_specific_features/pt-br/success/table.feature:8\n"
         u"    Dado que eu brinco com os seguintes itens: # tests/functional/language_specific_features/pt-br/success/table_steps.py:6\n"
-        u"      | id | description  |\n"
-        u"      | 12 | some desc    |\n"
-        u"      | 64 | another desc |\n"
-        u"#{up}#{up}#{up}#{up}    Dado que eu brinco com os seguintes itens: # tests/functional/language_specific_features/pt-br/success/table_steps.py:6\n"
         u"      | id | description  |\n"
         u"      | 12 | some desc    |\n"
         u"      | 64 | another desc |\n"
@@ -111,6 +108,7 @@ def test_output_outlines_success_colorful():
     "Language: pt-br -> sucess outlines colorful"
 
     runner = Runner(join_path('pt-br', 'success', 'outlines.feature'), verbosity=4)
+    couleur.proxy(sys.stdout).disable()
     runner.run()
 
     assert_stdout_lines(
