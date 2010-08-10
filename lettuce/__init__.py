@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-version = '0.1.9'
+version = '0.2.1'
 release = 'barium'
 
 import os
@@ -34,8 +34,9 @@ from lettuce.registry import STEP_REGISTRY
 from lettuce.registry import CALLBACK_REGISTRY
 
 from lettuce.exceptions import LettuceSyntaxError
+from lettuce.utils import debug
 
-__all__ = ['after', 'before', 'step', 'world', 'STEP_REGISTRY', 'CALLBACK_REGISTRY', 'call_hook']
+__all__ = ['after', 'before', 'step', 'world', 'STEP_REGISTRY', 'CALLBACK_REGISTRY', 'call_hook', 'debug']
 
 def _import(name):
     return __import__(name)
