@@ -38,7 +38,7 @@ all them are used within lettuce tests
 * [django](http://djangoproject.com/)
     > [sudo] pip install django
 * [couleur](http://github.com/gabrielfalcao/couleur/)
-    > [sudo] pip install couleur
+    > [sudo] pip install couleur>=0.3
 
 # Contributing
 

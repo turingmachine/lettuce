@@ -132,7 +132,7 @@ def test_defined_step_represent_string():
     step.run(True)
 
     assert_equals(
-        step.represent_string(step.sentence),
+       step.represent_string(step.sentence),
         "    Given I do nothing                   # tests/functional/output_features/runner_features/dumb_steps.py:6\n"
     )
 

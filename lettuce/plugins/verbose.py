@@ -64,11 +64,13 @@ def print_step_running(step):
 
 @after.each_step
 def print_step_ran(step):
+    buf = []
+
     if step.scenario.outlines:
         return
 
     if step.hashes:
-        write_out("#{up}" * (len(step.hashes) + 1))
+        buf.append(wp("#{up}" * (len(step.hashes) + 1)))
 
     string = step.represent_string(step.original_sentence)
 
@@ -92,23 +94,25 @@ def print_step_ran(step):
         color = "#{reset}#{yellow}"
         prefix = ""
 
-    write_out("%s%s%s" % (prefix, color, string))
+    buf.append(wp("%s%s%s" % (prefix, color, string)))
 
     if step.hashes:
         for line in step.represent_hashes().splitlines():
-            write_out("%s%s#{reset}\n" % (color, line))
+            buf.append(wp("%s%s#{reset}\n" % (color, line)))
 
     if step.failed:
-        wrt("#{bold}#{red}")
-        pspaced = lambda x: wrt("%s%s" % (" " * step.indentation, x))
+        buf.append("#{bold}#{red}")
+        pspaced = lambda x: buf.append("%s%s" % (" " * step.indentation, x))
         lines = step.why.traceback.splitlines()
 
         for pindex, line in enumerate(lines):
             pspaced(line)
             if pindex + 1 < len(lines):
-                wrt("\n")
+                buf.append("\n")
 
-        wrt("#{reset}\n")
+        buf.append("#{reset}\n")
+
+    wrt("".join(buf))
 
 @before.each_scenario
 def print_scenario_running(scenario):

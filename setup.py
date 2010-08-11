@@ -35,5 +35,6 @@ setup(name='lettuce',
     author_email='gabriel@nacaolivre.org',
     url='http://github.com/gabrielfalcao/lettuce',
     scripts = ['lettuce/lettuce'],
+    install_requires=["couleur>=0.3"],
     packages=get_packages()
 )
