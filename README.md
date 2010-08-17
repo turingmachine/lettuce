@@ -1,5 +1,5 @@
 # lettuce
-> Version 0.2 - emerald
+> Version 0.2-alpha - emerald
 
 ## On release names
 
