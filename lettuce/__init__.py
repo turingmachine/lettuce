@@ -38,9 +38,8 @@ from lettuce.registry import STEP_REGISTRY
 from lettuce.registry import CALLBACK_REGISTRY
 
 from lettuce.exceptions import LettuceSyntaxError
-from lettuce.utils import debug
 
-__all__ = ['after', 'before', 'step', 'world', 'STEP_REGISTRY', 'CALLBACK_REGISTRY', 'call_hook', 'debug']
+__all__ = ['after', 'before', 'step', 'world', 'STEP_REGISTRY', 'CALLBACK_REGISTRY', 'call_hook']
 
 try:
     terrain = fs.FileSystem._import("terrain")
