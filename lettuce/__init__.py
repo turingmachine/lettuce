@@ -34,9 +34,8 @@ from lettuce.registry import STEP_REGISTRY
 from lettuce.registry import CALLBACK_REGISTRY
 
 from lettuce.exceptions import LettuceSyntaxError
-from lettuce.utils import debug
 
-__all__ = ['after', 'before', 'step', 'world', 'STEP_REGISTRY', 'CALLBACK_REGISTRY', 'call_hook', 'debug']
+__all__ = ['after', 'before', 'step', 'world', 'STEP_REGISTRY', 'CALLBACK_REGISTRY', 'call_hook']
 
 def _import(name):
     return __import__(name)
