@@ -21,6 +21,7 @@ from lettuce import strings
 from lettuce import core
 from lettuce.terrain import after
 from lettuce.terrain import before
+from lettuce.terrain import world
 
 def wrt(what):
     sys.stdout.write(what.encode('utf-8'))
@@ -58,7 +59,7 @@ def print_step_running(step):
     string = step.represent_string(step.original_sentence)
     string = wrap_file_and_line(string, '#{bold}#{black}', '#{reset}')
     write_out("%s%s" % (color, string))
-    if step.hashes:
+    if step.hashes and world._verbosity is 4:
         for line in step.represent_hashes().splitlines():
             write_out("#{bold}#{black}%s#{reset}\n" % line)
 

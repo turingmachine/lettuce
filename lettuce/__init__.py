@@ -63,7 +63,7 @@ class Runner(object):
         """ lettuce.Runner will try to find a terrain.py file and
         import it from within `base_path`
         """
-
+        world._verbosity = verbosity
         self.single_feature = None
         if os.path.isfile(base_path) and os.path.exists(base_path):
             self.single_feature = base_path
