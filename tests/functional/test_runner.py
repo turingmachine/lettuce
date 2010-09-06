@@ -489,13 +489,13 @@ def test_output_with_successful_outline_colorful():
         '#{reset}#{cyan}    And I fill the field "password-confirm" with "<password>" #{bold}#{black}# tests/functional/output_features/success_outline/success_outline_steps.py:29#{reset}\n'
         '#{reset}#{cyan}    And I fill the field "email" with "<email>"               #{bold}#{black}# tests/functional/output_features/success_outline/success_outline_steps.py:29#{reset}\n'
         '#{reset}#{cyan}    And I click "done"                                        #{bold}#{black}# tests/functional/output_features/success_outline/success_outline_steps.py:33#{reset}\n'
-        '#{reset}#{cyan}    Then I see the message "<message>"                        #{bold}#{black}# tests/functional/output_features/success_outline/success_outline_steps.py:37#{reset}\n'
+        '#{reset}#{cyan}    Then I see the title of the page is "<title>"             #{bold}#{black}# tests/functional/output_features/success_outline/success_outline_steps.py:37#{reset}\n'
         '\n'
         '#{bold}#{white}  Examples:#{reset}\n'
-        '#{reset}#{cyan}   #{bold}#{white} |#{reset}#{cyan} username#{bold}#{white} |#{reset}#{cyan} password#{bold}#{white} |#{reset}#{cyan} email         #{bold}#{white} |#{reset}#{cyan} message      #{bold}#{white} |#{reset}#{cyan}#{reset}\n'
-        '#{bold}#{green}   #{bold}#{white} |#{bold}#{green} john    #{bold}#{white} |#{bold}#{green} doe-1234#{bold}#{white} |#{bold}#{green} john@gmail.org#{bold}#{white} |#{bold}#{green} Welcome, John#{bold}#{white} |#{bold}#{green}#{reset}\n'
-        '#{bold}#{green}   #{bold}#{white} |#{bold}#{green} mary    #{bold}#{white} |#{bold}#{green} wee-9876#{bold}#{white} |#{bold}#{green} mary@email.com#{bold}#{white} |#{bold}#{green} Welcome, Mary#{bold}#{white} |#{bold}#{green}#{reset}\n'
-        '#{bold}#{green}   #{bold}#{white} |#{bold}#{green} foo     #{bold}#{white} |#{bold}#{green} foo-bar #{bold}#{white} |#{bold}#{green} foo@bar.com   #{bold}#{white} |#{bold}#{green} Welcome, Foo #{bold}#{white} |#{bold}#{green}#{reset}\n'
+        '#{reset}#{cyan}   #{bold}#{white} |#{reset}#{cyan} username#{bold}#{white} |#{reset}#{cyan} password#{bold}#{white} |#{reset}#{cyan} email         #{bold}#{white} |#{reset}#{cyan} title            #{bold}#{white} |#{reset}#{cyan}#{reset}\n'
+        '#{bold}#{green}   #{bold}#{white} |#{bold}#{green} john    #{bold}#{white} |#{bold}#{green} doe-1234#{bold}#{white} |#{bold}#{green} john@gmail.org#{bold}#{white} |#{bold}#{green} John \| My Website#{bold}#{white} |#{bold}#{green}#{reset}\n'
+        '#{bold}#{green}   #{bold}#{white} |#{bold}#{green} mary    #{bold}#{white} |#{bold}#{green} wee-9876#{bold}#{white} |#{bold}#{green} mary@email.com#{bold}#{white} |#{bold}#{green} Mary \| My Website#{bold}#{white} |#{bold}#{green}#{reset}\n'
+        '#{bold}#{green}   #{bold}#{white} |#{bold}#{green} foo     #{bold}#{white} |#{bold}#{green} foo-bar #{bold}#{white} |#{bold}#{green} foo@bar.com   #{bold}#{white} |#{bold}#{green} Foo \| My Website #{bold}#{white} |#{bold}#{green}#{reset}\n'
         '\n'
         "#{bold}#{white}1 feature (#{bold}#{green}1 passed#{bold}#{white})#{reset}\n" \
         "#{bold}#{white}3 scenarios (#{bold}#{green}3 passed#{bold}#{white})#{reset}\n" \

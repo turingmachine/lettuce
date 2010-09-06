@@ -16,7 +16,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 version = '0.2.1'
-release = 'barium'
+release = 'emerald'
 
 import os
 import sys
