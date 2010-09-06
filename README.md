@@ -1,5 +1,5 @@
 # lettuce
-> Version 0.2 - emerald
+> Version 0.2-alpha - emerald
 
 ## On release names
 
@@ -38,7 +38,11 @@ all them are used within lettuce tests
 * [django](http://djangoproject.com/)
     > [sudo] pip install django
 * [couleur](http://github.com/gabrielfalcao/couleur/)
+<<<<<<< HEAD
     > [sudo] pip install couleur
+=======
+    > [sudo] pip install couleur>=0.3
+>>>>>>> 59674ebc4160a70207912d29c2a75850f081cc4a
 
 # Contributing
 

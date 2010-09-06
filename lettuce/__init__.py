@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-version = '0.2.1'
+version = '0.2-alpha'
 release = 'emerald'
 
 import os
@@ -25,7 +25,6 @@ import couleur
 from datetime import datetime
 
 from lettuce import fs
-
 from lettuce.core import Feature, TotalResult
 
 from lettuce.terrain import after
