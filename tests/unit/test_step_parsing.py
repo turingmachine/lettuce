@@ -22,6 +22,9 @@ I have the following beverages in my freezer:
    | Nestea | Ice-tea  |  2.10 |
 """
 
+STEP_ONE_FAKE_FILENAME = 'step1.feature'
+
+from lettuce.fs import FileSystem
 from lettuce.core import Step
 from nose.tools import assert_equals
 
@@ -74,3 +77,16 @@ def test_can_parse_tables():
             'Price': '2.10'
         }
     )
+
+def test_from_string_takes_filename_and_original_string():
+    "It can take filename and original string"
+
+    step = Step.from_string(
+        STEP1,
+        with_file=STEP_ONE_FAKE_FILENAME,
+        original_string=STEP1
+    )
+
+    assert_equals(step.described_at.file, FileSystem.relpath(STEP_ONE_FAKE_FILENAME))
+    assert_equals(step.described_at.line, 2)
+
