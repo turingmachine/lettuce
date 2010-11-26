@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # <Lettuce - Behaviour Driven Development for python>
 # Copyright (C) <2010>  Gabriel Falcão <gabriel@nacaolivre.org>
+# Copyright (C) <2010>  Reto Aebersold <aeby@atizo.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -52,6 +53,9 @@ class Command(BaseCommand):
 
         make_option('-s', '--scenarios', action='store', dest='scenarios', default=None,
             help='Comma separated list of scenarios to run'),
+        
+        make_option('-x', '--xml', action='store', dest='xml_filename', default=None,
+            help='Outputs JUnit compatible XML to given file'),
     )
     def stopserver(self, failed=False):
         raise SystemExit(int(failed))
@@ -99,7 +103,7 @@ class Command(BaseCommand):
                 if app_module is not None:
                     registry.call_hook('before_each', 'app', app_module)
 
-                runner = Runner(path, options.get('scenarios'), verbosity)
+                runner = Runner(path, options.get('scenarios'), verbosity, options.get('xml_filename', None))
                 result = runner.run()
                 if app_module is not None:
                     registry.call_hook('after_each', 'app', app_module, result)

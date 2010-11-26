@@ -8,3 +8,7 @@ build/
 dist/
 .DS_Store
 *.swp
+.project
+.pydevproject
+.settings/
+

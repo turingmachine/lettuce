@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # <Lettuce - Behaviour Driven Development for python>
 # Copyright (C) <2010>  Gabriel Falcão <gabriel@nacaolivre.org>
+# Copyright (C) <2010>  Reto Aebersold <aeby@atizo.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -14,6 +15,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+from lettuce.plugins.junitxml import JUnitXmlResult
 
 version = '0.1.16'
 release = 'barium'
@@ -58,7 +60,7 @@ class Runner(object):
     Takes a base path as parameter (string), so that it can look for
     features and step definitions on there.
     """
-    def __init__(self, base_path, scenarios=None, verbosity=0):
+    def __init__(self, base_path, scenarios=None, verbosity=0, xml_filename=None):
         """ lettuce.Runner will try to find a terrain.py file and
         import it from within `base_path`
         """
@@ -85,11 +87,41 @@ class Runner(object):
         reload(output)
 
         self.output = output
+        
+        self.junit_xml_result = None
+        if xml_filename:
+            self._xml_file = open(xml_filename, 'w+')
+            self._junit_xml_result = JUnitXmlResult(self._xml_file)
+            
+    def _create_junit_xml(self, total):
+        """
+        Write an JUnit compatible XML
+        """
+        for feature in total.feature_results:
+            for scenario in feature.scenario_results:
+                if scenario.passed:
+                    self._junit_xml_result.addSuccess({'classname': '%s (%s)' % (scenario.scenario.with_file,
+                                                                                 scenario.scenario.feature.name), 
+                                                                                'name': scenario.scenario.name,
+                                                                                'duration': scenario.duration})
+                else:
+                    for step in scenario.steps_failed:                                
+                        step.why.traceback = "Step: %s\n %s" %(step.sentence, step.why.traceback)
+                        self._junit_xml_result.addFailure({
+                                                       'classname': '%s (%s)' % (scenario.scenario.with_file, scenario.scenario.feature.name),
+                                                       'name': scenario.scenario.name,
+                                                       'duration':  scenario.duration,
+                                                       'failureException': type(step.why.exception)}, step.why)
+        self._junit_xml_result.stopTestRun(total.scenarios_ran)
+        self._xml_file.close()
 
     def run(self):
         """ Find and load step definitions, and them find and load
         features under `base_path` specified on constructor
         """
+        if self._junit_xml_result:
+            self._junit_xml_result.startTestRun()
+            
         started_at = datetime.now()
         self.loader.find_and_load_step_definitions()
 
@@ -134,5 +166,8 @@ class Runner(object):
                 print  "(finished within %d minutes)" % minutes
             elif seconds:
                 print  "(finished within %d seconds)" % seconds
+
+            if self._junit_xml_result:
+                self._create_junit_xml(total)
 
             return total
