@@ -88,7 +88,7 @@ class Runner(object):
 
         self.output = output
         
-        self.junit_xml_result = None
+        self._junit_xml_result = None
         if xml_filename:
             self._xml_file = open(xml_filename, 'w+')
             self._junit_xml_result = JUnitXmlResult(self._xml_file)
